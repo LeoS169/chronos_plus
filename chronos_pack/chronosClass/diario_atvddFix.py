@@ -76,5 +76,6 @@ class Atividade_fixa:
         # Converte hora_inicio e hora_final
         # Registra no Atividade no BD
             # O registro precisa verificar se o BD existe
+            # Ao registrar, ele define tempo disponivel
             # Se sim, função retorna ID, o que possibilita registro
         pass
