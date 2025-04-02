@@ -15,6 +15,11 @@ class Cronograma:
         self.data_fim = data_fim
         self.tempo_necessario = 0 # Soma de tempos das tasks
         
+        
+    def __str__(self):
+        return f"""{self.__class__.__name__}: 
+    {', '.join([f'{chave}={valor}' for chave, valor in self.__dict__.items()])}"""
+        
     
     @classmethod
     def criar(
@@ -54,6 +59,11 @@ class Task:
         self.status = "pendente" # Valor default
         self.prioridade = "baixa" # Valor default
         self.nome_cronograma = nome_cronograma
+    
+    
+    def __str__(self):
+        return f"""{self.__class__.__name__}: 
+    {', '.join([f'{chave}={valor}' for chave, valor in self.__dict__.items()])}"""
     
     
     @classmethod

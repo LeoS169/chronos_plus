@@ -17,6 +17,11 @@ class Diario:
         self._tempo_total = self.define_hora_total()
         self._tempo_disponivel = 0 # Definido a partir de atividades fixas
 
+    
+    def __str__(self):
+        return f"""{self.__class__.__name__}: 
+    {', '.join([f'{chave}={valor}' for chave, valor in self.__dict__.items()])}"""
+
 
     def define_hora_total(self) -> int:
         # Efetua a diferença
@@ -55,6 +60,11 @@ class Atividade_fixa:
         self.hora_final = hora_final
         self.nome_diario = nome_diario
         self.tempo_consome = self.define_tempo_consome()
+        
+        
+    def __str__(self):
+        return f"""{self.__class__.__name__}: 
+    {', '.join([f'{chave}={valor}' for chave, valor in self.__dict__.items()])}"""    
         
         
     def define_tempo_consome(self) -> int:
