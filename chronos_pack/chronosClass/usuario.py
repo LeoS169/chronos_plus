@@ -14,7 +14,7 @@ class Usuario:
         
 
     @classmethod
-    def cria_usuario(
+    def criar(
         cls,
         nome:str,
         email:str,
@@ -25,9 +25,19 @@ class Usuario:
         pass
     
     
+    def deletar(
+        self,
+        email:str,
+        senha:str
+    ):
+        # Verifica se usuário existe
+        # Deleta usuário
+        pass
+    
     @property 
     def senha(self):
         return self.senha
+    
     
     
 
