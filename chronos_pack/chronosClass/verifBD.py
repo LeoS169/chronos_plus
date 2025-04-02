@@ -14,12 +14,12 @@ def verify_usuario(email:str):
         conex = pg2.connect(**db_conex)
         cursor = conex.cursor()
         
-        query = "SELECT email FROM usuarios;"
+        query = "SELECT email FROM usuario;"
         cursor.execute(query)
         emails = cursor.fetchall()
         if emails:
             for email_bd in emails:
-                if email_bd == email:
+                if email_bd[0] == email:
                     return True
                 else:
                     return False
