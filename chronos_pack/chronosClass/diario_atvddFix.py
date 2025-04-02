@@ -18,7 +18,7 @@ class Diario:
         self._tempo_disponivel = 0 # Definido a partir de atividades fixas
 
 
-    def define_hora_total(self):
+    def define_hora_total(self) -> int:
         # Efetua a diferença
         # Retorna minutos
         dif_horas = self.hora_dorme - self.hora_acorda
@@ -40,5 +40,41 @@ class Diario:
         pass
     
 
-
+class Atividade_fixa:
+    def __init__(
+        self,
+        nome:str,
+        dia:str,
+        hora_inicio:datetime,
+        hora_final:datetime,
+        nome_diario:str
+    ):
+        self.nome = nome
+        self.dia = dia
+        self.hora_inicio = hora_inicio,
+        self.hora_final = hora_final
+        self.nome_diario = nome_diario
+        self.tempo_consome = self.define_tempo_consome()
         
+        
+    def define_tempo_consome(self) -> int:
+        # Efetua diferença
+        # Retorna minutos
+        dif_horas = self.hora_final - self.hora_final
+        return int(dif_horas.total_seconds()/60)
+    
+    
+    @classmethod
+    def criar(
+        cls,
+        nome:str,
+        dia:str,
+        hora_inicio:str, # format %H:%M
+        hora_final:str, # format %H:%M
+        nome_diario:str
+    ):
+        # Converte hora_inicio e hora_final
+        # Registra no Atividade no BD
+            # O registro precisa verificar se o BD existe
+            # Se sim, função retorna ID, o que possibilita registro
+        pass
