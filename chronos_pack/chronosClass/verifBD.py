@@ -30,3 +30,32 @@ def verify_usuario(email:str):
     finally:
         cursor.close()
         conex.close()
+        
+
+def verify_diario(nome:str):
+    global db_conex
+    # Recebe o nome do diario
+    # Retorna True, id_diario se ele existir
+    # Retorna False se não
+    try:
+        conex = pg2.connect(**db_conex)
+        cursor = conex.cursor()
+        
+        query = """
+            SELECT id_diario FROM diario
+            WHERE nome = %s;
+        """
+        
+        cursor.execute(query, (nome,))
+        id_diario = cursor.fetchone()
+        if id_diario:
+            return True, id_diario[0]
+        else:
+            return False, ''
+        
+    except Exception as e:
+        pass
+    finally:
+        cursor.close()
+        conex.close()
+        
