@@ -38,9 +38,9 @@ class Usuario:
         Cria Usuário no BD
         
         Parâmetros:
-            nome (str) : nome do user
-            email (str) : email do user
-            senha (str) : senha do user
+            nome (str): nome do user
+            email (str): email do user
+            senha (str): senha do user
         
         Retorno:
             str: status de inserção
@@ -73,8 +73,8 @@ class Usuario:
         Deleta Usuário do BD
         
         Parâmetros:
-            email (str) : email do user
-            senha (str) : senha do user
+            email (str): email do user
+            senha (str): senha do user
             
         Retorno:
             str: status de deleção
