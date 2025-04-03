@@ -1,6 +1,6 @@
 from datetime import date
 from verifBD import verify_usuario
-from manipBD import registra_usuario
+from manipBD import registra_usuario, deleta_usuario
 
 class Usuario:
     def __init__(self, nome:str, email:str, senha:str):
@@ -38,7 +38,7 @@ class Usuario:
             )
             return "Usuário criado", status
         else:
-            return "Usuário já existe!", status
+            return "Usuário já existe!", ''
     
     
     def deletar(
@@ -47,9 +47,16 @@ class Usuario:
         senha:str
     ):
         # Verifica se usuário existe
-        
         # Deleta usuário
-        pass
+        user_existe = verify_usuario(email=email)
+        if user_existe:
+            status = deleta_usuario(
+                email=email,
+                senha=senha
+            )
+            return 'Usuário deletado', status
+        else:
+            return "Usuário não existe!"
     
     @property 
     def senha(self):
