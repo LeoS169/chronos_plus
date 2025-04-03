@@ -1,12 +1,12 @@
 import psycopg2 as pg2
-import json
+from json import load
 
 # Esse arquivo possui funções para consultas
 # no banco de dados que possibilitam a validação
 # de dados informados pelo usuário
 
 with open("chronos_pack/chronosClass/connect.json", encoding="utf-8") as conexJson:
-    db_conex = json.load(conexJson)
+    db_conex = load(conexJson)
     
 
 def verify_usuario(email:str):

@@ -26,7 +26,7 @@ class Cronograma:
         cls,
         nome:str,
         descricao:str,
-        materias:list,
+        materias:list, # Lista objetos str()
         data_inicio:str, # format %d/%m/%Y
         data_fim:str # format %d/%m/%Y
     ):
