@@ -40,6 +40,19 @@ class Diario:
         hora_dorme:str, # format %H:%M
         id_usuario:str
     ):
+        """
+        Criar Diario no BD
+        
+        Parâmetros:
+            nome (str): nome do diario
+            descricao (str): descricao do diario
+            hora_acorda (str - HH:MM): hora que user acorda
+            hora_dorme (str - HH:MM): hora que user dorme
+            id_usuario (str): id ao qual o diario está vinculado
+            
+        Retornos:
+            status de criação
+        """
         diario_existe, _ = verify_diario(nome=nome)
         
         if not diario_existe:
@@ -59,7 +72,7 @@ class Diario:
             
             return "Diário criado", status
         else:
-            return "Diário já existe"
+            return "Diário já existe", ''
     
 
 class Atividade_fixa:
