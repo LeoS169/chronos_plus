@@ -1,19 +1,31 @@
 import psycopg2 as pg2
 from json import load
 
-# Esse arquivo possui funções para consultas
-# no banco de dados que possibilitam a validação
-# de dados informados pelo usuário
+"""
+Esse módulo possui funções para consultas
+no banco de dados que possibilitam a validação
+de dados informados pelo usuário
+"""
 
 with open("chronos_pack/chronosClass/connect.json", encoding="utf-8") as conexJson:
     db_conex = load(conexJson)
     
 
 def verify_usuario(email:str):
+    """
+    Verifica usuario
+    
+    Parâmetros:
+        email (str): email do user
+        
+    Retorno:
+        True -> user existe
+        False -> user não existe
+    
+    Excessão:
+        emails = None 
+    """
     global db_conex
-    # Recebe email do user
-    # Retorna True se email existir
-    # Retorna False se não existir
     try:
         conex = pg2.connect(**db_conex)
         cursor = conex.cursor()
@@ -37,10 +49,20 @@ def verify_usuario(email:str):
         
 
 def verify_diario(nome:str):
+    """
+    Verifica diario
+    
+    Parâmetros:
+        nome (str): nome do diario
+        
+    Retorno:
+        True, id_diario -> diario existe
+        False -> diario não existe
+    
+    Excessão:
+        id_diario = None 
+    """
     global db_conex
-    # Recebe o nome do diario
-    # Retorna True, id_diario se ele existir
-    # Retorna False se não
     try:
         conex = pg2.connect(**db_conex)
         cursor = conex.cursor()
@@ -65,6 +87,20 @@ def verify_diario(nome:str):
         
         
 def retorna_usuario(email:str, senha:str):
+    """
+    Retorna usuario
+    
+    Parâmetros:
+        email (str): email do user
+        senha (str): senha do user
+        
+    Retorno:
+        str, tuple -> user existe
+        str, None -> user não existe
+    
+    Excessão:
+        Exception 
+    """
     try:
         conex = pg2.connect(**db_conex)
         cursor = conex.cursor()
