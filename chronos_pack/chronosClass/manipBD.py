@@ -17,6 +17,21 @@ def registra_usuario(
     senha:str,
     data_criacao:str # format 'yyyy-mm-dd'
 ):
+    """
+    Registra usuario
+    
+    Parâmetros:
+        nome (str): nome do user
+        email (str): email do user
+        senha (str): senha do user
+        data_criacao (str): data_criacao do user
+        
+    Retornos:
+        str: status de inserção
+        
+    Excessão:
+        except Exeption
+    """
     try:
         conex = pg2.connect(**db_conex)
         cursor = conex.cursor()
@@ -39,6 +54,19 @@ def deleta_usuario(
     email:str,
     senha:str
 ):
+    """
+    Deleta usuario
+    
+    Parâmetro: 
+        email (str): email do user
+        senha (str): senha do user
+    
+    Retorno:
+        str: status de deleção
+        
+    Excessão:
+        except Exception
+    """
     try:
         conex = pg2.connect(**db_conex)
         cursor = conex.cursor()
@@ -73,6 +101,24 @@ def registra_diario(
     tempo_total:str,
     id_usuario:str
 ):
+    """
+    Registra diario
+    
+    Parâmetro: 
+        nome (str): nome do diario
+        descricao (str): descricao do diario
+        data_registro (str): data do registro
+        hora_acorda (str): hora que o user acorda
+        hora_dorme (str): hora que o user dorme
+        tempo_total (str): hora_dorme - hora_acorda
+        id_usuario (str): id para vincular ao diario
+    
+    Retorno:
+        str: status de registro
+        
+    Excessão:
+        except Exception
+    """
     try:
         conex = pg2.connect(**db_conex)
         cursor  = conex.cursor()
