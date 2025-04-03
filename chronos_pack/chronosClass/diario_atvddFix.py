@@ -1,5 +1,6 @@
 from datetime import date, datetime, time, timedelta
-
+from manipBD import registra_diario
+from verifBD import verify_diario
 
 class Diario:
     def __init__(
@@ -37,12 +38,28 @@ class Diario:
         descricao:str,
         hora_acorda:str, # format %H:%M
         hora_dorme:str, # format %H:%M
+        id_usuario:str
     ):
-        # Converte hora_acorda e hora_dorme
-        # Registra Diario no BD
-        hora_acorda = datetime.strptime(hora_acorda, "%H:%M")
-        hora_dorme = datetime.strptime(hora_dorme, "%H:%M")
-        pass
+        diario_existe, _ = verify_diario(nome=nome)
+        
+        if not diario_existe:
+            hora_acorda_date = datetime.strptime(hora_acorda, "%H:%M")
+            hora_dorme_date = datetime.strptime(hora_dorme, "%H:%M")
+            diario_criado = cls(nome, descricao, hora_acorda_date, hora_dorme_date)
+            
+            status = registra_diario(
+                nome=nome,
+                descricao=descricao,
+                data_registro=diario_criado.data_registro,
+                hora_acorda=hora_acorda,
+                hora_dorme=hora_dorme,
+                tempo_total=diario_criado._tempo_total,
+                id_usuario=id_usuario
+            )
+            
+            return "Diário criado", status
+        else:
+            return "Diário já existe"
     
 
 class Atividade_fixa:
