@@ -1,6 +1,13 @@
 from datetime import date, datetime, time, timedelta
 from manipBD import registra_diario
-from verifBD import verify_diario
+from verifBD import verify_diario, verify_usuario
+
+"""
+Class Diario/Atividade_fixa
+Esse módulo fornece a class Diario e
+Atividade_fixa que possuem funcionalidades
+para relações internas e com outras entidades
+"""
 
 class Diario:
     def __init__(
@@ -15,7 +22,7 @@ class Diario:
         self.data_registro = date.today()
         self.hora_acorda = hora_acorda
         self.hora_dorme = hora_dorme
-        self._tempo_total = self.define_hora_total()
+        self._tempo_total = self.define_tempo_total()
         self._tempo_disponivel = 0 # Definido a partir de atividades fixas
 
     
@@ -24,9 +31,17 @@ class Diario:
     {', '.join([f'{chave}={valor}' for chave, valor in self.__dict__.items()])}"""
 
 
-    def define_hora_total(self) -> int:
-        # Efetua a diferença
-        # Retorna minutos
+    def define_tempo_total(self) -> int:
+        """
+        Definição do _tempo_total
+        
+        Funcionalidade: faz a diferença
+        da hora_dorme e hora_acorda (datetime)
+        que resulta em um objeto timedelta
+        
+        Retorno:
+            int: dif_horas em minutos
+        """
         dif_horas = self.hora_dorme - self.hora_acorda
         return int(dif_horas.total_seconds()/60)
     
@@ -98,8 +113,16 @@ class Atividade_fixa:
         
         
     def define_tempo_consome(self) -> int:
-        # Efetua diferença
-        # Retorna minutos
+        """
+        Definição do tempo_consome
+        
+        Funcionalidade: faz a diferença
+        da hora_dorme e hora_acorda (datetime)
+        que resulta em um objeto timedelta
+        
+        Retorno:
+            int: dif_horas em minutos
+        """
         dif_horas = self.hora_final - self.hora_final
         return int(dif_horas.total_seconds()/60)
     
