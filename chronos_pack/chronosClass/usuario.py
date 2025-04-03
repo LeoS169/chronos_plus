@@ -82,8 +82,6 @@ class Usuario:
         Excessão:
             user_existe = False
         """
-        # Verifica se usuário existe
-        # Deleta usuário
         user_existe = verify_usuario(email=email)
         if user_existe:
             status = deleta_usuario(
