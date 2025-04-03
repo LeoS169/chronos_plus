@@ -2,6 +2,12 @@ import psycopg2 as pg2
 from json import load
 from verifBD import retorna_usuario
 
+"""
+Esse módulo possui as funções de manipulações
+diretas ao Banco de dados. Insert, Delete e 
+Alter.
+"""
+
 with open("chronos_pack/chronosClass/connect.json", encoding="utf-8") as conexJson:
     db_conex = load(conexJson)
 
@@ -57,6 +63,45 @@ def deleta_usuario(
         cursor.close()
         conex.close()
 
+
+def registra_diario(
+    nome:str,
+    descricao:str,
+    data_registro:str,
+    hora_acorda:str,
+    hora_dorme:str,
+    tempo_total:str,
+    id_usuario:str
+):
+    try:
+        conex = pg2.connect(**db_conex)
+        cursor  = conex.cursor()
+        
+        query = """
+            INSERT INTO diario (nome, descricao, data_registro, 
+            hora_acorda, hora_dorme, tempo_total, id_usuario)
+            VALUES (%s, %s, %s, %s, %s, %s, %s);
+        """
+        
+        cursor.execute(
+            query,
+            (
+                nome,
+                descricao,
+                data_registro,
+                hora_acorda,
+                hora_dorme,
+                tempo_total,
+                id_usuario
+            )
+        )
+        conex.commit()
+        return 'Insert confirmed'
+    except Exception as e:
+        return e
+    finally:
+        cursor.close()
+        conex.close()
     
     
     
