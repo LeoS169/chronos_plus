@@ -2,6 +2,13 @@ from datetime import date
 from verifBD import verify_usuario
 from manipBD import registra_usuario, deleta_usuario
 
+"""
+Class Usuário
+Esse módulo fornece a classe Usuário
+Ela possui funções que possibilitam a alteração
+e modificação da tabela homônimo no Banco de Dados 
+"""
+
 class Usuario:
     def __init__(self, nome:str, email:str, senha:str):
         self.nome = nome
@@ -13,7 +20,12 @@ class Usuario:
     def __str__(self):
         return f"""{self.__class__.__name__}: 
     {', '.join([f'{chave}={valor}' for chave, valor in self.__dict__.items()])}"""
+    
         
+    @property 
+    def senha(self):
+        return self.senha
+
 
     @classmethod
     def criar(
@@ -22,9 +34,20 @@ class Usuario:
         email:str,
         senha:str
     ):
-        # Verifica se usuário existe
-        # Converte data_criacao para o BD
-        # Registra User no BD
+        """
+        Cria Usuário no BD
+        
+        Parâmetros:
+            nome (str) : nome do user
+            email (str) : email do user
+            senha (str) : senha do user
+        
+        Retorno:
+            str: status de inserção
+        
+        Excessões:
+            user_existe = True.
+        """
         user_existe = verify_usuario(email=email)
         if not user_existe:
             user = cls(nome, email, senha)
@@ -46,6 +69,19 @@ class Usuario:
         email:str,
         senha:str
     ):
+        """
+        Deleta Usuário do BD
+        
+        Parâmetros:
+            email (str) : email do user
+            senha (str) : senha do user
+            
+        Retorno:
+            str: status de deleção
+            
+        Excessão:
+            user_existe = False
+        """
         # Verifica se usuário existe
         # Deleta usuário
         user_existe = verify_usuario(email=email)
@@ -58,9 +94,6 @@ class Usuario:
         else:
             return "Usuário não existe!"
     
-    @property 
-    def senha(self):
-        return self.senha
     
     
     
