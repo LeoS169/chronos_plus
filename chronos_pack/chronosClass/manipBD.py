@@ -265,4 +265,61 @@ def atualiza_tempo_disponivel(
         conex.close()
     
 
+def registra_cronograma(
+    nome:str,
+    descricao:str,
+    materias:list[str],
+    data_inicio:str,
+    data_fim:str,
+    tempo_necessario:str,
+    id_usuario:str,
+    id_diario:str
     
+):
+    """
+    Registra um cronograma no BD.
+
+    Parâmetros:
+        nome (str): Nome do cronograma.
+        descricao (str): Descrição do cronograma.
+        materias (list[str]): Lista de matérias associadas.
+        data_inicio (str): Data de início (YYYY-MM-DD).
+        data_fim (str): Data de fim (YYYY-MM-DD).
+        tempo_necessario (str): Tempo necessário para conclusão.
+        id_usuario (str): ID do usuário dono do cronograma.
+        id_diario (str): ID do diário associado.
+
+    Retorna:
+        str: Mensagem de confirmação ou erro.
+    
+    """
+    try:
+        conex = pg2.connect(**db_conex)
+        cursor = conex.cursor()
+        query = """
+        INSERT INTO cronograma (nome, descricao, materias, data_inicio, 
+        data_fim, tempo_necessario, id_usuario, id_diario)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        """
+        cursor.execute(
+            query,
+            (
+                nome,
+                descricao,
+                materias,
+                data_inicio,
+                data_fim,
+                tempo_necessario,
+                id_usuario,
+                id_diario
+            )
+        )
+        conex.commit()
+        return "Insert confirmed"
+    except Exception as e:
+        return e
+    finally:
+        cursor.close()
+        conex.close()
+    
+        
