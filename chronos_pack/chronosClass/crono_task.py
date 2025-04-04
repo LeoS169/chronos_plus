@@ -1,4 +1,6 @@
 from datetime import datetime
+from manipBD import registra_cronograma
+from consulBD import retorna_diario
 
 class Cronograma:
     def __init__(
@@ -10,6 +12,7 @@ class Cronograma:
       data_fim:datetime
     ):
         self.nome = nome
+        self.descricao = descricao
         self.materias = materias
         self.data_inicio = data_inicio
         self.data_fim = data_fim
@@ -28,14 +31,27 @@ class Cronograma:
         descricao:str,
         materias:list, # Lista objetos str()
         data_inicio:str, # format %d/%m/%Y
-        data_fim:str # format %d/%m/%Y
+        data_fim:str, # format %d/%m/%Y
+        id_usuario:str,
+        nome_diario:str
     ):
-        # Converte data_inicio e data_fim
-        # Cria objeto
-        # Registra no banco de dados
         data_inicio = datetime.strptime(data_inicio, "%d/%m/%Y")
         data_fim = datetime.strptime(data_fim, "%d/%m/%Y")
-        pass
+        crono_criado = cls(nome, descricao, materias, data_inicio, data_fim)
+        
+        id_diario = retorna_diario(nome_diario)[1][0]
+        
+        status = registra_cronograma(
+            nome=nome,
+            descricao=descricao,
+            materias=materias,
+            data_inicio=data_inicio,
+            data_fim=data_fim,
+            tempo_necessario=crono_criado.tempo_necessario,
+            id_usuario=id_usuario,
+            id_diario=id_diario
+        )
+        return status
     
 
 class Task:
