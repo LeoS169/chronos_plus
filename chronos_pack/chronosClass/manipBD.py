@@ -169,13 +169,18 @@ def registra_atividade_fixa(
         hora_inicio (str): hora inicial HH:MM 
         hora_final (str): hora final HH:MM
         tempo_consome (str): tempo consumido
-        id_usuario (str): id do usuario
+        id_diario (str): id do diario
         
     Retorno:
         status de inserção
     
     Excessão:
         except Exception
+        
+    Obs:
+        dia (str) no escopo ['segunda',
+        'terça', 'quarta, 'quinta',
+        'sexta', 'sábado', 'domingo']
     """
     try:
         conex = pg2.connect(**db_conex)
