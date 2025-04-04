@@ -1,6 +1,6 @@
 from datetime import date, datetime, time, timedelta
 from manipBD import (registra_diario, registra_atividade_fixa,
-vincula_atvdd_diario)
+atualiza_tempo_disponivel)
 from verifBD import verify_diario, verify_usuario
 from consulBD import retorna_diario
 
@@ -155,7 +155,7 @@ class Atividade_fixa:
             tempo_consome=fixa_criada.tempo_consome,
             id_diario=id_diario
         )
-        status_vinculo = vincula_atvdd_diario(
+        status_vinculo = atualiza_tempo_disponivel(
             id_diario=id_diario,
             tempo_consome=fixa_criada.tempo_consome
         )

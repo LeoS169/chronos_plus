@@ -160,6 +160,23 @@ def registra_atividade_fixa(
     tempo_consome:str,
     id_diario:str
 ):
+    """
+    Registra Atividade fixa
+    
+    Parâmetros:
+        nome (str): nome da atividade
+        dia (str): dia 
+        hora_inicio (str): hora inicial HH:MM 
+        hora_final (str): hora final HH:MM
+        tempo_consome (str): tempo consumido
+        id_usuario (str): id do usuario
+        
+    Retorno:
+        status de inserção
+    
+    Excessão:
+        except Exception
+    """
     try:
         conex = pg2.connect(**db_conex)
         cursor = conex.cursor()
@@ -168,6 +185,7 @@ def registra_atividade_fixa(
             hora_final, tempo_consome, id_diario)
             VALUES (%s, %s, %s, %s, %s, %s);
         """
+        
         cursor.execute(
             query,
             (
@@ -188,42 +206,58 @@ def registra_atividade_fixa(
         conex.close()
     
     
-def vincula_atvdd_diario(
+def atualiza_tempo_disponivel(
     id_diario:str,
     tempo_consome:str
 ):
-    # Verifica se tempo consome cabe no tempo_total
-    # Faz a subtração do tempo_total
-    # Faz atualização do tempo disponivel
-    conex = pg2.connect(**db_conex)
-    cursor = conex.cursor()
-    
-    # Requisição de dados do diario
-    query = """
-    SELECT tempo_disponivel FROM diario
-    WHERE id_diario = %s;
     """
-    cursor.execute(query, (id_diario,))
-    dados = cursor.fetchone()
+    Vincula Atividade Diario
     
-    tempo_disponivel = int(dados[0])
-    tempo_consome = int(tempo_consome)
-    
-    # Atualização dos dados
-    if tempo_disponivel >= tempo_consome:
-        tempo_disponivel -= tempo_consome
+    Parâmetros:
+        id_diario (str): id do diário
+        tempo_consome (str): tempo que atividade consome
         
+    Retorno:
+        status de atualização
+    
+    Excessão:
+        except Exception
+        se tempo_disponivel < tempo_consome
+    """
+    try:
+        conex = pg2.connect(**db_conex)
+        cursor = conex.cursor()
+        
+        # Requisição de dados do diario
         query = """
-        UPDATE diario
-        SET tempo_disponivel = %s
+        SELECT tempo_disponivel FROM diario
         WHERE id_diario = %s;
         """
-        cursor.execute(query, (tempo_disponivel, id_diario,))
-        conex.commit()
-        return "Tempo diário atualizado"
+        cursor.execute(query, (id_diario,))
+        dados = cursor.fetchone()
         
-    else:
-        return "Tempo inválido!"
-
+        tempo_disponivel = int(dados[0])
+        tempo_consome = int(tempo_consome)
+        
+        # Atualização dos dados
+        if tempo_disponivel >= tempo_consome:
+            tempo_disponivel -= tempo_consome
+            
+            query = """
+            UPDATE diario
+            SET tempo_disponivel = %s
+            WHERE id_diario = %s;
+            """
+            cursor.execute(query, (tempo_disponivel, id_diario,))
+            conex.commit()
+            return "Tempo diário atualizado"
+        else:
+            return "Tempo inválido!"
+    except Exception as e:
+        return e
+    finally:
+        cursor.close()
+        conex.close()
+    
 
     
