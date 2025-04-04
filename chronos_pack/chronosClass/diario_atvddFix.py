@@ -82,6 +82,7 @@ class Diario:
                 hora_acorda=hora_acorda,
                 hora_dorme=hora_dorme,
                 tempo_total=diario_criado._tempo_total,
+                tempo_disponivel=diario_criado._tempo_total,
                 id_usuario=id_usuario
             )
             
