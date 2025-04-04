@@ -19,8 +19,8 @@ def verify_usuario(email:str):
         email (str): email do user
         
     Retorno:
-        True -> user existe
-        False -> user não existe
+        True: user existe
+        False: user não existe
     
     Excessão:
         emails = None 
@@ -56,8 +56,8 @@ def verify_diario(nome:str):
         nome (str): nome do diario
         
     Retorno:
-        True, id_diario -> diario existe
-        False -> diario não existe
+        True, str: diario existe
+        False: diario não existe
     
     Excessão:
         id_diario = None 

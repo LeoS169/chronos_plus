@@ -68,7 +68,9 @@ class Diario:
             id_usuario (str): id ao qual o diario está vinculado
             
         Retornos:
-            status de criação
+            tuple:
+                (str, str): Diario criado com sucesso
+                (str, None): Diário já existe
         """
         diario_existe, _ = verify_diario(nome=nome)
         
@@ -90,7 +92,7 @@ class Diario:
             
             return "Diário criado", status
         else:
-            return "Diário já existe", ''
+            return "Diário já existe", None
     
 
 class Atividade_fixa:
@@ -150,7 +152,8 @@ class Atividade_fixa:
             nome_diario (str): nome do diario para vínculo
             
         Retorno:
-            status de inserção e de vínculo
+            tuple:
+                (str, str): status de inserção
         
         Except:
             None

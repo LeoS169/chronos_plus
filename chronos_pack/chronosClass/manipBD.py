@@ -172,7 +172,7 @@ def registra_atividade_fixa(
         id_diario (str): id do diario
         
     Retorno:
-        status de inserção
+        stt: status de inserção
     
     Excessão:
         except Exception
@@ -223,7 +223,7 @@ def atualiza_tempo_disponivel(
         tempo_consome (str): tempo que atividade consome
         
     Retorno:
-        status de atualização
+        str: status de inserção
     
     Excessão:
         except Exception
