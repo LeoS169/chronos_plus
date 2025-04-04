@@ -139,6 +139,27 @@ class Atividade_fixa:
         hora_final:str, # format %H:%M
         nome_diario:str
     ):
+        """
+        Criar Atividade Fixa no BD
+        
+        Parâmetros:
+            nome (str): nome da atividade
+            dia (str): dia da atividade
+            hora_inicio (str): hora inicial HH:MM
+            hora_final (str): hora final HH:MM 
+            nome_diario (str): nome do diario para vínculo
+            
+        Retorno:
+            status de inserção e de vínculo
+        
+        Except:
+            None
+        
+        Obs:
+            Não há como haver excessão, função
+            chamada apênas sob certeza de existência
+            do diário.
+        """
         hora_inicio_dt = datetime.strptime(hora_inicio, '%H:%M')
         hora_final_dt = datetime.strptime(hora_final, '%H:%M')
         
