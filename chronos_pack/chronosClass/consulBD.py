@@ -19,8 +19,10 @@ def retorna_usuario(email:str, senha:str):
         senha (str): senha do user
         
     Retorno:
-        str, tuple -> user existe
-        str, None -> user não existe
+        tuple:
+            - ('Diário encontrado', tuple): caso o usuario exista.
+            - ('Diário não encontrado', None): caso não exista.
+            - (Exception, str): em caso de erro na execução.
     
     Excessão:
         Exception 
@@ -43,6 +45,19 @@ def retorna_usuario(email:str, senha:str):
         
 
 def retorna_diario(nome:str):
+    """
+    Retorna diário
+    
+    Parâmetro:
+        nome (str): nome do diario
+        
+    Retorno:
+        tuple:
+            - ('Diário encontrado', tuple): caso o diário exista.
+            - ('Diário não encontrado', None): caso não exista.
+            - (Exception, str): em caso de erro na execução.
+    
+    """
     try:
         conex = pg2.connect(**db_conex)
         cursor = conex.cursor()
