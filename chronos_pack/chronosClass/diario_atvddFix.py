@@ -1,6 +1,8 @@
 from datetime import date, datetime, time, timedelta
-from manipBD import registra_diario
+from manipBD import (registra_diario, registra_atividade_fixa,
+vincula_atvdd_diario)
 from verifBD import verify_diario, verify_usuario
+from consulBD import retorna_diario
 
 """
 Class Diario/Atividade_fixa
@@ -102,7 +104,7 @@ class Atividade_fixa:
     ):
         self.nome = nome
         self.dia = dia
-        self.hora_inicio = hora_inicio,
+        self.hora_inicio = hora_inicio
         self.hora_final = hora_final
         self.nome_diario = nome_diario
         self.tempo_consome = self.define_tempo_consome()
@@ -124,7 +126,7 @@ class Atividade_fixa:
         Retorno:
             int: dif_horas em minutos
         """
-        dif_horas = self.hora_final - self.hora_final
+        dif_horas = self.hora_final - self.hora_inicio
         return int(dif_horas.total_seconds()/60)
     
     
@@ -137,9 +139,24 @@ class Atividade_fixa:
         hora_final:str, # format %H:%M
         nome_diario:str
     ):
-        # Converte hora_inicio e hora_final
-        # Registra no Atividade no BD
-            # O registro precisa verificar se o BD existe
-            # Ao registrar, ele define tempo disponivel
-            # Se sim, função retorna ID, o que possibilita registro
-        pass
+        hora_inicio_dt = datetime.strptime(hora_inicio, '%H:%M')
+        hora_final_dt = datetime.strptime(hora_final, '%H:%M')
+        
+        fixa_criada = cls(nome, dia, hora_inicio_dt, hora_final_dt, nome_diario)
+        
+        id_diario = retorna_diario(nome_diario)[1][0]
+        print(fixa_criada.tempo_consome)
+        
+        status_insert = registra_atividade_fixa(
+            nome=nome,
+            dia=dia,
+            hora_inicio=hora_inicio,
+            hora_final=hora_final,
+            tempo_consome=fixa_criada.tempo_consome,
+            id_diario=id_diario
+        )
+        status_vinculo = vincula_atvdd_diario(
+            id_diario=id_diario,
+            tempo_consome=fixa_criada.tempo_consome
+        )
+        return status_insert, status_vinculo
