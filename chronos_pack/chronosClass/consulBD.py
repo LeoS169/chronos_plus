@@ -40,3 +40,21 @@ def retorna_usuario(email:str, senha:str):
     finally:
         cursor.close()
         conex.close()
+        
+
+def retorna_diario(nome:str):
+    try:
+        conex = pg2.connect(**db_conex)
+        cursor = conex.cursor()
+        
+        query = """
+            SELECT * FROM diario WHERE nome = %s;
+        """
+        cursor.execute(query, (nome,))
+        diario = cursor.fetchone()
+        return 'Diario encontrado', diario
+    except Exception as e:
+        return e, ''
+    finally:
+        cursor.close()
+        conex.close()
