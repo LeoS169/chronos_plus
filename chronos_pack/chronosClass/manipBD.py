@@ -149,6 +149,40 @@ def registra_diario(
         cursor.close()
         conex.close()
     
+
+def registra_atividade_fixa(
+    nome:str,
+    dia:str,
+    hora_inicio:str,
+    hora_final:str,
+    tempo_consome:str,
+    id_diario:str
+):
+    try:
+        conex = pg2.connect(**db_conex)
+        cursor = conex.cursor()
+        query = """
+            INSERT INTO atividade_fixas (nome, dia, hora_inicio, hora_final, tempo_consome, id_diario)
+            VALUES (%s, %s, %s, %s, %s, %s);
+        """
+        cursor.execute(
+            query,
+            (
+                nome,
+                dia,
+                hora_inicio,
+                hora_final,
+                tempo_consome,
+                id_diario
+            )
+        )
+        conex.commit()
+        return "Insert confirmed"
+    except Exception as e:
+        return e
+    finally:
+        cursor.close()
+        conex.close()
     
     
     
