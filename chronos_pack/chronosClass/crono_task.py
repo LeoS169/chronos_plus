@@ -1,5 +1,7 @@
 from datetime import datetime
-from manipBD import registra_cronograma
+from manipBD import (registra_cronograma,
+registra_task, atualiza_tempo_necessario,
+atualiza_tempo_disponivel)
 from consulBD import retorna_diario
 
 class Cronograma:
@@ -71,7 +73,7 @@ class Task:
         self.dia = dia
         self.hora_inicio = hora_inicio
         self.hora_final = hora_final
-        self.tempo_previsto = 0
+        self.tempo_previsto = self.define_tempo_previsto()
         self.status = "pendente" # Valor default
         self.prioridade = "baixa" # Valor default
         self.nome_cronograma = nome_cronograma
@@ -82,6 +84,10 @@ class Task:
     {', '.join([f'{chave}={valor}' for chave, valor in self.__dict__.items()])}"""
     
     
+    def define_tempo_previsto(self) -> int:
+        dif_horas = self.hora_final - self.hora_inicio
+        return int(dif_horas.total_seconds()/60)
+    
     @classmethod
     def criar(
         cls,
@@ -91,10 +97,45 @@ class Task:
         dia:str,
         hora_inicio:str, # format %H:%M
         hora_final:str, # format %H:%M
-        nome_cronograma:str
+        id_cronograma:str,
+        id_diario:str
     ):
-        # Verifica se materia está dentro do escopo do cronograma referido
-        # Registra no BD
-        # Verifica se tempo previsto cabe em tempo_necessario
-        # Adiciona tempo_previsto ao tempo_necessario do cronograma
-        pass
+        # Conversão das horas
+        hora_inicio_dt = datetime.strptime(hora_inicio, '%H:%M')
+        hora_final_dt = datetime.strptime(hora_final, '%H:%M')
+        # Cria objeto
+        task_criada = cls(
+            nome,
+            descricao,
+            materia,
+            dia,
+            hora_inicio_dt,
+            hora_final_dt,
+            id_cronograma
+        )
+        # Faz o insert
+        status_insert = registra_task(
+            nome=nome,
+            descricao=descricao,
+            materia=materia,
+            dia=dia,
+            status=task_criada.status,
+            prioridade=task_criada.prioridade,
+            hora_inicio=hora_inicio,
+            hora_final=hora_final,
+            tempo_previsto=task_criada.tempo_previsto,
+            id_cronograma=id_cronograma
+        )
+        # Adiciona tempo necessário
+        status_att = atualiza_tempo_necessario(
+            id_cronograma,
+            task_criada.tempo_previsto
+        )
+        # Subtrai do tempo disponível
+        status_vinc = atualiza_tempo_disponivel(
+            id_diario=id_diario,
+            tempo_consome=task_criada.tempo_previsto
+        )
+        # Status das funcções
+        return status_insert, status_att, status_vinc
+
