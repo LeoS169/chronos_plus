@@ -216,7 +216,7 @@ def atualiza_tempo_disponivel(
     tempo_consome:str
 ):
     """
-    Vincula Atividade Diario
+    Atualiza tempo disponivel no Diario
     
     Parâmetros:
         id_diario (str): id do diário
@@ -322,4 +322,49 @@ def registra_cronograma(
         cursor.close()
         conex.close()
     
+
+def registra_task(
+    nome:str,
+    descricao:str,
+    materia:str,
+    dia:str,
+    status:str,
+    prioridade:str,
+    hora_inicio:str,
+    hora_final:str,
+    tempo_previsto:str,
+    id_cronograma:str
+):
+    try:
+        conex = pg2.connect()
+        cursor = conex.cursor()
+        query = """
+        INSERT INTO task (nome, descricao, materia, dia,
+        status, prioridade, hora_inicio, hora_final
+        tempo_previsto, id_cronograma)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """
         
+        cursor.execute(
+            query,
+            (
+                nome,
+                descricao,
+                materia,
+                dia,
+                status,
+                prioridade,
+                hora_inicio,
+                hora_final,
+                tempo_previsto,
+                id_cronograma,
+            )
+        )
+        conex.commit()
+        return "Insert Confirmed"
+    except Exception as e:
+        return e
+    finally:
+        cursor.close()
+        conex.close()
+    
