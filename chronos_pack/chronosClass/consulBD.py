@@ -73,3 +73,24 @@ def retorna_diario(nome:str):
     finally:
         cursor.close()
         conex.close()
+        
+
+def retorna_materias_crono(id_cronograma:str):
+    try:
+        conex = pg2.connect(**db_conex)
+        cursor = conex.cursor()
+        query = """
+        SELECT materias FROM cronograma
+        WHERE id_cronograma = %s;
+        """
+        
+        cursor.execute(query, (id_cronograma,))
+        materias = cursor.fetchone()
+        return "Materias encontradas", materias[0]
+    except Exception as e:
+        return e
+    finally:
+        cursor.close()
+        conex.close()
+    
+    
