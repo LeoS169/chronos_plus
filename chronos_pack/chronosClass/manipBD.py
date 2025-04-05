@@ -335,6 +335,27 @@ def registra_task(
     tempo_previsto:str,
     id_cronograma:str
 ):
+    """
+    Registra task no BD
+    
+    Parâmetros:
+        nome (str): nome da task
+        descricao (str): descricao da task
+        materia (str): materia
+        dia (str): dia da task
+        status (str): status da task
+        prioridade (str): prioridade da task
+        hora_inicio (str): inicio da task
+        hora_final (str): fim da task
+        tempo_previsto (str): tempo de duracao
+        id_cronograma (str): id do cronograma
+    
+    Retornos:
+        str: status de inserção
+        
+    Excessão:
+        except Exception
+    """
     try:
         conex = pg2.connect(**db_conex)
         cursor = conex.cursor()
@@ -373,6 +394,19 @@ def atualiza_tempo_necessario(
     id_cronograma:str,
     tempo_previsto:str
 ):
+    """
+    Atualiza tempo necessário
+    
+    Parâmetros:
+        id_cronograma (str): id do cronograma
+        tempo_previsto (str): tempo em que é feito
+        
+    Retornos:
+        str: status
+        
+    Excessão:
+        except Exception
+    """
     try:
         conex = pg2.connect(**db_conex)
         cursor = conex.cursor()
