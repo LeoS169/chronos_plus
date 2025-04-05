@@ -336,11 +336,11 @@ def registra_task(
     id_cronograma:str
 ):
     try:
-        conex = pg2.connect()
+        conex = pg2.connect(**db_conex)
         cursor = conex.cursor()
         query = """
         INSERT INTO task (nome, descricao, materia, dia,
-        status, prioridade, hora_inicio, hora_final
+        status, prioridade, hora_inicio, hora_final,
         tempo_previsto, id_cronograma)
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """
@@ -367,4 +367,42 @@ def registra_task(
     finally:
         cursor.close()
         conex.close()
+
     
+def atualiza_tempo_necessario(
+    id_cronograma:str,
+    tempo_previsto:str
+):
+    try:
+        conex = pg2.connect(**db_conex)
+        cursor = conex.cursor()
+        
+        # Requisição de dados do diario
+        query = """
+        SELECT tempo_necessario FROM cronograma
+        WHERE id_cronograma = %s;
+        """
+        cursor.execute(query, (id_cronograma,))
+        dados = cursor.fetchone()
+        
+        tempo_necessario = int(dados[0])
+        tempo_previsto = int(tempo_previsto)
+        
+        # Atualização dos dados
+        tempo_necessario += tempo_previsto
+        query = """
+        UPDATE cronograma
+        SET tempo_necessario = %s
+        WHERE id_cronograma = %s;
+        """
+        
+        cursor.execute(query, (tempo_necessario, 
+            id_cronograma,))
+        conex.commit()
+        
+        return "Tempo necessário atualizado"
+    except Exception as e:
+        return e
+    finally:
+        cursor.close()
+        conex.close()
