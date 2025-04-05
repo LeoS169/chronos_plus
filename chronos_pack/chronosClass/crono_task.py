@@ -37,6 +37,28 @@ class Cronograma:
         id_usuario:str,
         nome_diario:str
     ):
+        """
+        Criar Cronograma no BD
+        
+        Parâmetros:
+            nome (str): nome do cronograma
+            descricao (str): descricao do cronograma
+            materias (str): escopo de matérias
+            data_inicio (str): inicio do cronograma
+            data_fim (str): fim do cronograma
+            id_usuario (str): id do user logado
+            nome_diario (str): nome do diário ativo
+            
+        Retornos:
+            str: status de inserção
+        
+        Excessão:
+            except Exception
+
+        Obs:
+            materias define o escopo de
+            escolhas da Task vinculada ao cronograma
+        """
         data_inicio = datetime.strptime(data_inicio, "%d/%m/%Y")
         data_fim = datetime.strptime(data_fim, "%d/%m/%Y")
         crono_criado = cls(nome, descricao, materias, data_inicio, data_fim)
@@ -65,7 +87,7 @@ class Task:
         dia:str,
         hora_inicio:datetime,
         hora_final:datetime,
-        nome_cronograma:str
+        id_cronograma:str
     ):
         self.nome = nome
         self.descricao = descricao
@@ -76,7 +98,7 @@ class Task:
         self.tempo_previsto = self.define_tempo_previsto()
         self.status = "pendente" # Valor default
         self.prioridade = "baixa" # Valor default
-        self.nome_cronograma = nome_cronograma
+        self.id_cronograma = id_cronograma
     
     
     def __str__(self):
@@ -98,11 +120,33 @@ class Task:
         hora_inicio:str, # format %H:%M
         hora_final:str, # format %H:%M
         id_cronograma:str,
-        id_diario:str
+        nome_diario:str
     ):
+        """
+        Criar Task no BD
+        
+        Parâmetros:
+            nome (str): nome do cronograma
+            descricao (str): descricao do cronograma
+            materia (str): materia da task
+            hora_inicio (str): inicio da task
+            hora_final (str): fim da task
+            id_cronograma (str): id do cronograma ativo
+            nome_diario (str): nome do diário ativo
+            
+        Retornos:
+            tuple:
+                (str, str, str): status de inserção,
+                atualização do diario e do cronograma
+        
+        Excessão:
+            None
+        """
         # Conversão das horas
         hora_inicio_dt = datetime.strptime(hora_inicio, '%H:%M')
         hora_final_dt = datetime.strptime(hora_final, '%H:%M')
+        # Pega id_diario
+        id_diario = retorna_diario(nome_diario)[1][0]
         # Cria objeto
         task_criada = cls(
             nome,
