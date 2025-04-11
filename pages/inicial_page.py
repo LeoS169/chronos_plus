@@ -1,4 +1,5 @@
 import flet as ft
+from .conv import cria_botao
 
 def pagina_inicial(page: ft.Page):
     page.title = "Chronos+"
@@ -18,12 +19,28 @@ def pagina_inicial(page: ft.Page):
         size=140
     )
     
+    # Botões
+    entrar_botao = cria_botao("_Entrar")
+    cadastrar_botao = cria_botao("_Cadastrar")
+    
     # Container com botões de entrar e cadastrar
     container_bot = ft.Container(
+        content=ft.Column(
+            width=560,
+            controls=[entrar_botao, cadastrar_botao],
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            spacing=40
+        ),
         bgcolor="#25274A",
         width=560,
         height=540,
-        border_radius=30
+        border_radius=30,
+        padding=65,
+        shadow=ft.BoxShadow(
+            spread_radius=5,
+            blur_radius=100
+            
+        )
     )
     
     # Coluna da esquerda
@@ -64,4 +81,4 @@ def pagina_inicial(page: ft.Page):
         )
     )
     
-    
+
