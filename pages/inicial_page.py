@@ -15,26 +15,52 @@ def pagina_inicial(page: ft.Page):
     chronos_name = ft.Text(
         value='_CHRONOS+',
         font_family="Jersey25",
-        size=110
+        size=140
     )
     
+    # Container com botões de entrar e cadastrar
+    container_bot = ft.Container(
+        bgcolor="#25274A",
+        width=560,
+        height=540,
+        border_radius=30
+    )
     
+    # Coluna da esquerda
     column_esquerda =  ft.Column(
         controls=[chronos_name],
-        alignment=ft.MainAxisAlignment.CENTER
-    );
+        alignment=ft.MainAxisAlignment.START,
+        horizontal_alignment=ft.CrossAxisAlignment.CENTER
+    )
     
+    # Coluna da direita
     column_direita = ft.Column(
-        controls=[],
-        alignment=ft.MainAxisAlignment.CENTER
-    );
+        controls=[container_bot],
+        alignment=ft.MainAxisAlignment.CENTER,
+        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        expand=1
+    )
     
+    # Container da esquerda
+    container_esquerda = ft.Container(
+        content=column_esquerda,
+        expand=1,
+        margin=ft.margin.only(top=50)
+    )
+    
+    # Container da direita
+    container_direita = ft.Container(
+        content=column_direita,
+        expand=1
+    )
+    
+    # Adição de elementos
     page.add(
         ft.Row(
             [
-                column_esquerda,
-                column_direita
-            ], alignment=ft.MainAxisAlignment.CENTER
+                container_esquerda,
+                container_direita
+            ], expand=True
         )
     )
     
