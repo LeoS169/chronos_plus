@@ -1,6 +1,12 @@
 import flet as ft
 from .conv import cria_botao
 
+"""
+Script com página inicial
+do Chronos+ com botões de login
+e sign in
+"""
+
 def pagina_inicial(page: ft.Page):
     page.title = "Chronos+"
     page.horizontal_alignment = ft.MainAxisAlignment.CENTER
@@ -54,8 +60,7 @@ def pagina_inicial(page: ft.Page):
     column_direita = ft.Column(
         controls=[container_bot],
         alignment=ft.MainAxisAlignment.CENTER,
-        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-        expand=1
+        horizontal_alignment=ft.CrossAxisAlignment.CENTER
     )
     
     # Container da esquerda
