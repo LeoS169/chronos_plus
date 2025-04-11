@@ -1,5 +1,5 @@
 import flet as ft
-from .conv import cria_botao
+from .assets.tools.conv import cria_botao
 
 """
 Script com página inicial
@@ -12,9 +12,9 @@ def pagina_inicial(page: ft.Page):
     page.horizontal_alignment = ft.MainAxisAlignment.CENTER
     page.bgcolor = "#222333"
     page.fonts = {
-        "Jersey10": "pages/fonts/Jersey10-Regular.ttf",
-        "Jersey15": "pages/fonts/Jersey15-Regular.ttf",
-        "Jersey25": "pages/fonts/Jersey25-Regular.ttf"
+        "Jersey10": "pages/assets/fonts/Jersey10-Regular.ttf",
+        "Jersey15": "pages/assets/fonts/Jersey15-Regular.ttf",
+        "Jersey25": "pages/assets/fonts/Jersey25-Regular.ttf"
     }
 
 
