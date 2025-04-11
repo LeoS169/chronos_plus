@@ -26,8 +26,8 @@ def pagina_inicial(page: ft.Page):
     )
     
     # Botões
-    entrar_botao = cria_botao("_Entrar")
-    cadastrar_botao = cria_botao("_Cadastrar")
+    entrar_botao = cria_botao("_Entrar", None)
+    cadastrar_botao = cria_botao("_Cadastrar", None)
     
     # Container com botões de entrar e cadastrar
     container_bot = ft.Container(

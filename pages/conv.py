@@ -1,7 +1,7 @@
 from flet import (ElevatedButton, Text, 
 ButtonStyle, RoundedRectangleBorder)
 
-def cria_botao(texto:str):
+def cria_botao(texto:str, funcao:function):
     return ElevatedButton(
         content=Text(
             texto,
@@ -17,5 +17,5 @@ def cria_botao(texto:str):
         ),
         width=400,
          height=120,
-         on_click=None
+         on_click=funcao
     )
