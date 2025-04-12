@@ -1,10 +1,10 @@
 from flet import(Row, Page, MainAxisAlignment,
     Text, Column, ScrollMode, app)
 
-from assets.tools.conv import (cria_container_elementos,
+from .assets.tools.conv import (cria_container_elementos,
     cria_container_entrada, cria_botao)
 
-from fluxo import voltar_pagina_inicial 
+from .fluxo import voltar_pagina_inicial 
 
 """
 Script com pagina de cadastro.
@@ -12,7 +12,7 @@ Aparece ao clicar botão cadastrar da
 página inicial.
 """
 
-def pagina_entrar(page:Page):
+def pagina_cadastrar(page:Page):
     page.title = "Chronos+"
     page.horizontal_alignment = MainAxisAlignment.CENTER
     page.bgcolor = "#222333"
