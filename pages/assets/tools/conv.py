@@ -22,7 +22,7 @@ def cria_botao(texto:str, funcao):
     )
     
 
-def cria_container(content):
+def cria_container_elementos(content):
     return Container(
         content=content,
         bgcolor="#25274A",
