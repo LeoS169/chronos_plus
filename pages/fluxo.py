@@ -13,3 +13,9 @@ def go_entrar(page: Page):
     from .entrar_page import pagina_entrar
     page.clean()
     pagina_entrar(page=page)
+    
+    
+def go_cadastro(page: Page):
+    from .cadastro_page import pagina_cadastrar
+    page.clean()
+    pagina_cadastrar(page=page)
