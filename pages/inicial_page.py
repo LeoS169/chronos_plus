@@ -1,7 +1,7 @@
 import flet as ft
 from .assets.tools.conv import (cria_botao,
     cria_container_elementos)
-from .fluxo import go_entrar
+from .fluxo import go_entrar, go_cadastro
 
 """
 Script com página inicial
@@ -32,8 +32,12 @@ def pagina_inicial(page: ft.Page):
     entrar_botao = cria_botao(
         "_Entrar",
         funcao=lambda e: go_entrar(page=page)
-        )
-    cadastrar_botao = cria_botao("_Cadastrar", None)
+    )
+    
+    cadastrar_botao = cria_botao(
+        "_Cadastrar",
+        funcao=lambda e: go_cadastro(page=page)   
+    )
     
     # Container com botões de entrar e cadastrar
     container_bot = cria_container_elementos(
