@@ -13,6 +13,7 @@ def pagina_inicial(page: ft.Page):
     page.title = "Chronos+"
     page.horizontal_alignment = ft.MainAxisAlignment.CENTER
     page.bgcolor = "#222333"
+    page.window.full_screen = True
     page.fonts = {
         "Jersey10": "pages/assets/fonts/Jersey10-Regular.ttf",
         "Jersey15": "pages/assets/fonts/Jersey15-Regular.ttf",
