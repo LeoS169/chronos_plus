@@ -1,10 +1,9 @@
 import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from chronos_pack.chronosClass.verifBD import verify_usuario
+from chronos_pack.chronosClass.consulBD import retorna_usuario
 from flet import(Row, Page, MainAxisAlignment,
-    Text, Column, ScrollMode, TextField, SnackBar,
-    app)
+    Text, Column, ScrollMode, TextField, app)
 
 from .assets.tools.conv import (cria_container_elementos,
     cria_container_entrada, cria_botao, open_snack_bar)
@@ -36,13 +35,22 @@ def pagina_entrar(page:Page):
         email = email_entrada.value
         senha = senha_entrada.value
         
+        
         if not email or not senha:
             open_snack_bar(
-                page,
-                "Campos obrigatórios não preenchidos",
-                '#971717'
+                page=page,
+                texto="Campos obrigatórios não preenchidos",
+                cor='#971717'
             )
-            
+        else:
+            _, user = retorna_usuario(email, senha)
+            if not user:
+                open_snack_bar(
+                    page=page,
+                    texto=f"Email ou senha invalido!",
+                    cor="#971717"
+                )
+        
         page.update()
             
     
