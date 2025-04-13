@@ -1,8 +1,8 @@
 from flet import(Row, Page, MainAxisAlignment,
-    Text, Column, ScrollMode, app)
+    Text, Column, ScrollMode, TextField, app)
 
 from .assets.tools.conv import (cria_container_elementos,
-    cria_container_entrada, cria_botao)
+    cria_container_entrada, cria_botao, open_snack_bar)
 
 from .fluxo import voltar_pagina_inicial 
 
@@ -25,10 +25,23 @@ def pagina_cadastrar(page:Page):
     
     
     def func_sign_botao(
+        nome_entrada:TextField,
+        email_entrada:TextField,
+        senha_entrada:TextField
         
     ):
-        pass
-    
+        nome = nome_entrada.value
+        email = email_entrada.value
+        senha = senha_entrada.value
+        
+        if not nome or not email or not senha:
+            open_snack_bar(
+                page=page,
+                texto="Campos obrigatórios não preenchidos",
+                cor='#971717'
+            )
+        page.update()
+            
     # Texto da página de entrar
     entrar_name = Text(
         value="_Cadastrar",
@@ -50,9 +63,19 @@ def pagina_cadastrar(page:Page):
         "_Password", "Jersey10"
     )
     
+    # TextFields das entradas
+    nome_txtField = entrada_nome_container.content.controls[1]
+    email_txtField = entrada_email_container.content.controls[1]
+    senha_txtField = entrada_senha_container.content.controls[1]
+    
     # Botões de Login e Voltar
     sign_botao = cria_botao(
-        "Sign In", None
+        texto="Sign In",
+        funcao=lambda e: func_sign_botao(
+            nome_entrada=nome_txtField,
+            email_entrada=email_txtField,
+            senha_entrada=senha_txtField
+        )
     )
     sign_botao.width = 220
     sign_botao.height = 60
