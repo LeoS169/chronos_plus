@@ -27,6 +27,14 @@ def pagina_entrar(page:Page):
         "Jersey25": "pages/assets/fonts/Jersey25-Regular.ttf"
     }
     
+    
+    def func_login_botao(
+        email:str,
+        senha:str
+    ):
+        pass
+    
+    
     # Texto da página de entrar
     entrar_name = Text(
         value="_Entrar",
@@ -38,19 +46,26 @@ def pagina_entrar(page:Page):
     entrada_email = cria_container_entrada(
         "_E-mail", "Jersey10"
     )
-    
     entrada_senha = cria_container_entrada(
         "_Password", "Jersey10"
     )
     
+    # TextFields do cria_container_entrada
+    email_txtField = entrada_email.content.controls[1]
+    senha_txtField = entrada_senha.content.controls[1]
+
+    
     # Botões de Login e Voltar
     login_botao = cria_botao(
-        "Login", None
+        "Login",
+        funcao=lambda e: func_login_botao(
+            email=str(email_txtField.value),
+            senha=str(senha_txtField.value)
+        )
     )
     login_botao.width = 220
     login_botao.height = 60
     login_botao.content.size = 50
-
     
     voltar_botao = cria_botao(
         "Voltar", lambda e: voltar_pagina_inicial(page)
