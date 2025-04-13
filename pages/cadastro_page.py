@@ -1,3 +1,8 @@
+import sys, os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+from chronos_pack.chronosClass.verifBD import verify_usuario
+
 from flet import(Row, Page, MainAxisAlignment,
     Text, Column, ScrollMode, TextField, app)
 
@@ -40,6 +45,17 @@ def pagina_cadastrar(page:Page):
                 texto="Campos obrigatórios não preenchidos",
                 cor='#971717'
             )
+        else:
+            user_existe = verify_usuario(email)
+            if not user_existe:
+                # Faz o cadastro
+                pass
+            else:
+                open_snack_bar(
+                    page=page,
+                    texto=f"{email} já registrado!",
+                    cor="#971717"
+                )
         page.update()
             
     # Texto da página de entrar
