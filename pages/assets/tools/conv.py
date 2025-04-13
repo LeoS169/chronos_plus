@@ -62,12 +62,12 @@ def open_snack_bar(page:Page, texto:str, cor:str):
     page.open(SnackBar(
                 content=Row(
                     controls=[Text(
-                        value="Campo obrigatório não preenchido",
+                        value=texto,
                         color="#FFFFFF",
                         font_family="Jersey15",
                         size=50
                     )],
                     alignment=MainAxisAlignment.CENTER
                     ),
-                bgcolor="#971717"
+                bgcolor=cor
             ))
