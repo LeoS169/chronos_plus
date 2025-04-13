@@ -1,6 +1,7 @@
-from flet import (ElevatedButton, Text, 
+from flet import (Page, ElevatedButton, Text, 
 ButtonStyle, RoundedRectangleBorder, Container,
-BoxShadow, Column, TextField, TextStyle)
+BoxShadow, Column, TextField, TextStyle, SnackBar,
+Row, MainAxisAlignment)
 
 def cria_botao(texto:str, funcao):
     return ElevatedButton(
@@ -56,3 +57,17 @@ def cria_container_entrada(label:str, fonte:str):
         width=560,
         height=140 
     )
+
+def open_snack_bar(page:Page, texto:str, cor:str):
+    page.open(SnackBar(
+                content=Row(
+                    controls=[Text(
+                        value="Campo obrigatório não preenchido",
+                        color="#FFFFFF",
+                        font_family="Jersey15",
+                        size=50
+                    )],
+                    alignment=MainAxisAlignment.CENTER
+                    ),
+                bgcolor="#971717"
+            ))

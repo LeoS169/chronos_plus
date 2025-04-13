@@ -7,7 +7,7 @@ from flet import(Row, Page, MainAxisAlignment,
     app)
 
 from .assets.tools.conv import (cria_container_elementos,
-    cria_container_entrada, cria_botao)
+    cria_container_entrada, cria_botao, open_snack_bar)
 
 from .fluxo import voltar_pagina_inicial 
 
@@ -37,18 +37,11 @@ def pagina_entrar(page:Page):
         senha = senha_entrada.value
         
         if not email or not senha:
-            page.open(SnackBar(
-                content=Row(
-                    controls=[Text(
-                        value="Campo obrigatório não preenchido",
-                        color="#FFFFFF",
-                        font_family="Jersey15",
-                        size=50
-                    )],
-                    alignment=MainAxisAlignment.CENTER
-                    ),
-                bgcolor="#971717"
-            ))
+            open_snack_bar(
+                page,
+                "Campos obrigatórios não preenchidos",
+                '#971717'
+            )
             
         page.update()
             
