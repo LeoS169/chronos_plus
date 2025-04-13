@@ -1,6 +1,6 @@
 import psycopg2 as pg2
 from json import load
-from consulBD import retorna_usuario
+from .consulBD import retorna_usuario
 
 """
 Esse módulo possui as funções de manipulações

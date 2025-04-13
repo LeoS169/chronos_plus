@@ -1,8 +1,8 @@
 from datetime import datetime
-from manipBD import (registra_cronograma,
+from .manipBD import (registra_cronograma,
 registra_task, atualiza_tempo_necessario,
 atualiza_tempo_disponivel)
-from consulBD import retorna_diario
+from .consulBD import retorna_diario
 
 class Cronograma:
     def __init__(

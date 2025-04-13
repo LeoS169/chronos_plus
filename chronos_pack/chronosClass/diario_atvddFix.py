@@ -1,8 +1,8 @@
 from datetime import date, datetime, time, timedelta
-from manipBD import (registra_diario, registra_atividade_fixa,
+from .manipBD import (registra_diario, registra_atividade_fixa,
 atualiza_tempo_disponivel)
-from verifBD import verify_diario, verify_usuario
-from consulBD import retorna_diario
+from .verifBD import verify_diario, verify_usuario
+from .consulBD import retorna_diario
 
 """
 Class Diario/Atividade_fixa

@@ -1,6 +1,6 @@
 from datetime import date
-from verifBD import verify_usuario
-from manipBD import registra_usuario, deleta_usuario
+from .verifBD import verify_usuario
+from .manipBD import registra_usuario, deleta_usuario
 
 """
 Class Usuário
