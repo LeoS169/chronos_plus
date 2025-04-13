@@ -3,7 +3,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from chronos_pack.chronosClass.verifBD import verify_usuario
 from flet import(Row, Page, MainAxisAlignment,
-    Text, Column, ScrollMode, TextField, app)
+    Text, Column, ScrollMode, TextField, SnackBar,
+    app)
 
 from .assets.tools.conv import (cria_container_elementos,
     cria_container_entrada, cria_botao)
@@ -35,6 +36,22 @@ def pagina_entrar(page:Page):
         email = email_entrada.value
         senha = senha_entrada.value
         
+        if not email or not senha:
+            page.open(SnackBar(
+                content=Text(
+                    value="Campo obrigatório não preenchido",
+                    color="#FFFFFF",
+                    font_family="Jersey15",
+                    size=50
+                    ),
+                bgcolor="#971717", 
+            ))
+            
+            
+        else:
+            email_entrada.error_text = None
+        page.update()
+            
     
     # Texto da página de entrar
     entrar_name = Text(
@@ -44,16 +61,16 @@ def pagina_entrar(page:Page):
     )
     
     # Containers de entrada
-    entrada_email = cria_container_entrada(
+    entrada_email_container = cria_container_entrada(
         "_E-mail", "Jersey10"
     )
-    entrada_senha = cria_container_entrada(
+    entrada_senha_container = cria_container_entrada(
         "_Password", "Jersey10"
     )
     
     # TextFields do cria_container_entrada
-    email_txtField = entrada_email.content.controls[1]
-    senha_txtField = entrada_senha.content.controls[1]
+    email_txtField = entrada_email_container.content.controls[1]
+    senha_txtField = entrada_senha_container.content.controls[1]
 
     
     # Botões de Login e Voltar
@@ -80,8 +97,8 @@ def pagina_entrar(page:Page):
     container_valores = cria_container_elementos(
         Column(
             controls=[
-                entrada_email,
-                entrada_senha,
+                entrada_email_container,
+                entrada_senha_container,
                 Row(
                     [login_botao, voltar_botao],
                     alignment=MainAxisAlignment.CENTER
