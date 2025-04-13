@@ -23,6 +23,12 @@ def pagina_cadastrar(page:Page):
         "Jersey25": "pages/assets/fonts/Jersey25-Regular.ttf"
     }
     
+    
+    def func_sign_botao(
+        
+    ):
+        pass
+    
     # Texto da página de entrar
     entrar_name = Text(
         value="_Cadastrar",
@@ -32,25 +38,25 @@ def pagina_cadastrar(page:Page):
     )
     
     # Containers de entrada
-    entrada_nome = cria_container_entrada(
+    entrada_nome_container = cria_container_entrada(
         "_Nome", "Jersey10"
     )
     
-    entrada_email = cria_container_entrada(
+    entrada_email_container = cria_container_entrada(
         "_E-mail", "Jersey10"
     )
     
-    entrada_senha = cria_container_entrada(
+    entrada_senha_container = cria_container_entrada(
         "_Password", "Jersey10"
     )
     
     # Botões de Login e Voltar
-    login_botao = cria_botao(
+    sign_botao = cria_botao(
         "Sign In", None
     )
-    login_botao.width = 220
-    login_botao.height = 60
-    login_botao.content.size = 50
+    sign_botao.width = 220
+    sign_botao.height = 60
+    sign_botao.content.size = 50
 
     
     voltar_botao = cria_botao(
@@ -65,11 +71,11 @@ def pagina_cadastrar(page:Page):
     container_valores = cria_container_elementos(
         Column(
             controls=[
-                entrada_nome,
-                entrada_email,
-                entrada_senha,
+                entrada_nome_container,
+                entrada_email_container,
+                entrada_senha_container,
                 Row(
-                    [login_botao, voltar_botao],
+                    [sign_botao, voltar_botao],
                     alignment=MainAxisAlignment.CENTER
                 )
                 ],

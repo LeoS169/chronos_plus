@@ -50,6 +50,7 @@ def pagina_entrar(page:Page):
                     texto=f"Email ou senha invalido!",
                     cor="#971717"
                 )
+            # Abre página principal
         
         page.update()
             
