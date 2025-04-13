@@ -1,3 +1,7 @@
+import sys, os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+from chronos_pack.chronosClass.usuario import Usuario 
 from flet import(Row, Page, MainAxisAlignment,
     Text, Column, ScrollMode, app)
 
