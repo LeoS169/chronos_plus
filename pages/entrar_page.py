@@ -1,9 +1,9 @@
 import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from chronos_pack.chronosClass.consulBD import retorna_usuario
+from chronos_pack.chronosClass.verifBD import verify_usuario
 from flet import(Row, Page, MainAxisAlignment,
-    Text, Column, ScrollMode, app)
+    Text, Column, ScrollMode, TextField, app)
 
 from .assets.tools.conv import (cria_container_elementos,
     cria_container_entrada, cria_botao)
@@ -29,11 +29,12 @@ def pagina_entrar(page:Page):
     
     
     def func_login_botao(
-        email:str,
-        senha:str
+        email_entrada:TextField,
+        senha_entrada:TextField
     ):
-        pass
-    
+        email = email_entrada.value
+        senha = senha_entrada.value
+        
     
     # Texto da página de entrar
     entrar_name = Text(
@@ -59,8 +60,8 @@ def pagina_entrar(page:Page):
     login_botao = cria_botao(
         "Login",
         funcao=lambda e: func_login_botao(
-            email=str(email_txtField.value),
-            senha=str(senha_txtField.value)
+            email_entrada=email_txtField,
+            senha_entrada=senha_txtField
         )
     )
     login_botao.width = 220
