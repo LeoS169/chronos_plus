@@ -38,18 +38,18 @@ def pagina_entrar(page:Page):
         
         if not email or not senha:
             page.open(SnackBar(
-                content=Text(
-                    value="Campo obrigatório não preenchido",
-                    color="#FFFFFF",
-                    font_family="Jersey15",
-                    size=50
+                content=Row(
+                    controls=[Text(
+                        value="Campo obrigatório não preenchido",
+                        color="#FFFFFF",
+                        font_family="Jersey15",
+                        size=50
+                    )],
+                    alignment=MainAxisAlignment.CENTER
                     ),
-                bgcolor="#971717", 
+                bgcolor="#971717"
             ))
             
-            
-        else:
-            email_entrada.error_text = None
         page.update()
             
     
