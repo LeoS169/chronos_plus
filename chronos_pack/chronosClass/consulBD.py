@@ -20,8 +20,8 @@ def retorna_usuario(email:str, senha:str):
         
     Retorno:
         tuple:
-            - ('Diário encontrado', tuple): caso o usuario exista.
-            - ('Diário não encontrado', None): caso não exista.
+            - ('Usuário encontrado', tuple): caso o usuario exista.
+            - ('Usuário não encontrado', None): caso não exista.
             - (Exception, str): em caso de erro na execução.
     
     Excessão:
