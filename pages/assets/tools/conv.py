@@ -4,6 +4,16 @@ BoxShadow, Column, TextField, TextStyle, SnackBar,
 Row, MainAxisAlignment)
 
 def cria_botao(texto:str, funcao):
+    """
+    Cria Botão ElevationButton
+    
+    Parâmetros:
+        texto (str): texto no botão
+        funcao (any): funcao no on_click
+    
+    Retornos:
+        ElevatedButton
+    """
     return ElevatedButton(
         content=Text(
             texto,
@@ -57,6 +67,7 @@ def cria_container_entrada(label:str, fonte:str):
         width=560,
         height=140 
     )
+
 
 def open_snack_bar(page:Page, texto:str, cor:str):
     page.open(SnackBar(
