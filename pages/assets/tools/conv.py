@@ -3,6 +3,12 @@ ButtonStyle, RoundedRectangleBorder, Container,
 BoxShadow, Column, TextField, TextStyle, SnackBar,
 Row, MainAxisAlignment)
 
+"""
+Esse script é a modularização de funcionalidades 
+que ajudam na criação do Chronos, como objetos 
+usados constantemente ou funcionalidades repetitivas
+"""
+
 def cria_botao(texto:str, funcao):
     """
     Cria Botão ElevationButton
