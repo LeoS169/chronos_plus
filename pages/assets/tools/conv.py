@@ -12,7 +12,7 @@ def cria_botao(texto:str, funcao):
         funcao (any): funcao no on_click
     
     Retornos:
-        ElevatedButton
+        elevatedButton: flet.ElevatedButton
     """
     return ElevatedButton(
         content=Text(
@@ -34,6 +34,15 @@ def cria_botao(texto:str, funcao):
     
 
 def cria_container_elementos(content):
+    """
+    Cria conteiner Container
+    
+    Parâmetros:
+        content (flet): objeto flet a ser inserido
+        
+    Retornos:
+        container: flet.Container
+    """
     return Container(
         content=content,
         bgcolor="#25274A",
@@ -49,6 +58,19 @@ def cria_container_elementos(content):
     
 
 def cria_container_entrada(label:str, fonte:str):
+    """
+    Cria conteiner de entrada
+        Container que possui um
+        rótulo e um campo de texto
+        organizados
+        
+    Parametros:
+        label (str): rótulo do campo
+        font (str): fonte a ser usada
+        
+    Retorno:
+        Container: flet.Container
+    """
     return Container(
         content=Column(
                 controls=[
@@ -70,6 +92,19 @@ def cria_container_entrada(label:str, fonte:str):
 
 
 def open_snack_bar(page:Page, texto:str, cor:str):
+    """
+    Open snack bar
+        Abre barra informativa abaixo
+        da janela
+        
+    Parametros:
+        page (flet.Page): page da pagina usada
+        text (str): texto da snackBar
+        cor (str -> format "#XXXXXX") cor da snackBar:
+        
+    Retorno:
+        None
+    """
     page.open(SnackBar(
                 content=Row(
                     controls=[Text(
