@@ -32,7 +32,6 @@ def pagina_entrar(page:Page):
         email = email_entrada.value
         senha = senha_entrada.value
         
-        
         if not email or not senha:
             open_snack_bar(
                 page=page,
@@ -49,11 +48,19 @@ def pagina_entrar(page:Page):
                 )
             else:
                 diarios = retorna_diarioinfo_userEmail(email)
-                define_userinfo(
-                    user=user,
-                    diarioAtivo=diarios[0][0],
-                    qntDiario=len(diarios)   
-                )
+                if diarios:
+                    define_userinfo(
+                        user=user,
+                        diarioAtivo=diarios[0][0],
+                        qntDiario=len(diarios)   
+                    )
+                else:
+                    define_userinfo(
+                        user=user,
+                        diarioAtivo=None,
+                        qntDiario=0   
+                    )
+                    
             # Abre página principal
         
         page.update()

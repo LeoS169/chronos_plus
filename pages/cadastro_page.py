@@ -58,7 +58,7 @@ def pagina_cadastrar(page:Page):
                 define_userinfo(
                     user=user,
                     diarioAtivo=None,
-                    qntDiario=None 
+                    qntDiario=0 
                 )
             else:
                 open_snack_bar(
