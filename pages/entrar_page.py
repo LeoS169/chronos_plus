@@ -1,13 +1,10 @@
 import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from chronos_pack.chronosClass.consulBD import retorna_usuario
-from flet import(Row, Page, MainAxisAlignment,
-    Text, Column, ScrollMode, TextField, app)
-
-from .assets.tools.conv import (cria_container_elementos,
-    cria_container_entrada, cria_botao, open_snack_bar)
-
+from .assets.tools.conv import cria_container_elementos, cria_container_entrada, cria_botao, open_snack_bar
+from .assets.tools.defUserinfo import define_userinfo
+from chronos_pack.chronosClass.consulBD import retorna_usuario, retorna_diarioinfo_userEmail
+from flet import Row, Page, MainAxisAlignment, Text, Column, ScrollMode, TextField, app
 from .fluxo import voltar_pagina_inicial 
 
 """
@@ -49,6 +46,13 @@ def pagina_entrar(page:Page):
                     page=page,
                     texto=f"Email ou senha invalido!",
                     cor="#971717"
+                )
+            else:
+                diarios = retorna_diarioinfo_userEmail(email)
+                define_userinfo(
+                    user=user,
+                    diarioAtivo=diarios[0][0],
+                    qntDiario=len(diarios)   
                 )
             # Abre página principal
         
