@@ -38,7 +38,7 @@ def retorna_usuario(email:str, senha:str):
         user = cursor.fetchone()
         return 'Usuario encontrado', user
     except Exception as e:
-        return e, ''
+        return e, None
     finally:
         cursor.close()
         conex.close()
@@ -69,7 +69,7 @@ def retorna_diario(nome:str):
         diario = cursor.fetchone()
         return 'Diario encontrado', diario
     except Exception as e:
-        return e, ''
+        return e, None
     finally:
         cursor.close()
         conex.close()
@@ -88,7 +88,7 @@ def retorna_materias_crono(id_cronograma:str):
         materias = cursor.fetchone()
         return "Materias encontradas", materias[0]
     except Exception as e:
-        return e
+        return e, None
     finally:
         cursor.close()
         conex.close()
