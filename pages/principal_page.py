@@ -2,7 +2,7 @@ import sys, os
 from json import load
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from assets.tools.conv import cria_container_elementos
+from assets.tools.conv import cria_container_elementos, cria_botao
 from flet import app, Page, MainAxisAlignment, CrossAxisAlignment, Row, Column, Text
 
 
@@ -27,17 +27,17 @@ def pagina_principal(page:Page):
     diario_ativo_txt = Text(
         "Diário ativo: nenhum",
         font_family="Jersey15",
-        size=60
+        size=50
     )
     horas_estu_txt = Text(
         "Horas estudadas: 2h",
         font_family="Jersey15",
-        size=60
+        size=50
     )
     horas_restantes_txt = Text(
         "Horas restantes: 8h",
         font_family="Jersey15",
-        size=60
+        size=50
     )
     
     # Colunas da Row superior
@@ -51,12 +51,29 @@ def pagina_principal(page:Page):
             diario_ativo_txt,
             horas_estu_txt,
             horas_restantes_txt
-        ],
-        horizontal_alignment=CrossAxisAlignment.CENTER,
-        spacing=0
+        ]
     )
     
-    # COntainer principal
+    # Botoes
+    
+    diario_btn = cria_botao("_Diário", None)
+    chronos_btn = cria_botao("_Chronos", None)
+    estati_btn = cria_botao("_Estatísticas", None)
+    _ = cria_botao("_NãoSei", None)
+    
+    coluna_inferior_esq = Column(
+        [diario_btn, chronos_btn],
+        alignment=MainAxisAlignment.CENTER,
+        spacing=75
+    )
+    
+    coluna_inferior_dir = Column(
+        [estati_btn, _],
+        alignment=MainAxisAlignment.CENTER,
+        spacing=75
+    )
+    
+    # Container principal
     main_container = cria_container_elementos(
         Column(
             [
@@ -65,11 +82,18 @@ def pagina_principal(page:Page):
                     alignment=MainAxisAlignment.CENTER,
                     spacing=250
                 ),
-                Row()
+                Row( # Row inferior
+                    [
+                        coluna_inferior_esq,
+                        coluna_inferior_dir
+                    ],
+                    alignment=MainAxisAlignment.CENTER,
+                    spacing=75
+                )
             ]  
         )
     )
-    main_container.margin = 30
+    main_container.margin = 20
     main_container.width = 1200
     main_container.height = 680
     
