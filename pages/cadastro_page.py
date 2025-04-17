@@ -2,6 +2,7 @@ import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from chronos_pack.chronosClass.verifBD import verify_usuario
+from chronos_pack.chronosClass.usuario import Usuario
 
 from flet import(Row, Page, MainAxisAlignment,
     Text, Column, ScrollMode, TextField, app)
@@ -46,14 +47,21 @@ def pagina_cadastrar(page:Page):
                 cor='#971717'
             )
         else:
-            user_existe = verify_usuario(email)
-            if not user_existe:
-                # Faz o cadastro
-                pass
+            status, status_ins = Usuario.criar(
+                nome=nome,
+                email=email,
+                senha=senha
+            )
+            if status_ins:
+                open_snack_bar(
+                    page=page,
+                    texto=status,
+                    cor="#006913"
+                )
             else:
                 open_snack_bar(
                     page=page,
-                    texto=f"{email} já registrado!",
+                    texto=status,
                     cor="#971717"
                 )
         page.update()
