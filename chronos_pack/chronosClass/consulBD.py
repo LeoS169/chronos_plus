@@ -93,4 +93,31 @@ def retorna_materias_crono(id_cronograma:str):
         cursor.close()
         conex.close()
     
+
+def retorna_diarioinfo_userId(userId:str):
+    try:
+        conex = pg2.connect(**db_conex)
+        cursor = conex.cursor()
+        query = """
+        SELECT nome FROM diario
+        WHERE id_usuario = %s;
+        """
+        
+        cursor.execute(query, (userId,))
+        diarios_nome = cursor.fetchall()
+        
+        query = """
+        SELECT count(nome) FROM diario
+        WHERE id_usuario = %s;
+        """
+        
+        cursor.execute(query, (userId,))
+        qnt_diarios = cursor.fetchall()
+        
+        return diarios_nome, qnt_diarios
+    except Exception as e:
+        return e, None
+    finally:
+        cursor.close()
+        conex.close()
     
