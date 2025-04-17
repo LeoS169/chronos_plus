@@ -48,19 +48,13 @@ def pagina_entrar(page:Page):
                 )
             else:
                 diarios = retorna_diarioinfo_userEmail(email)
-                if diarios:
-                    define_userinfo(
-                        user=user,
-                        diarioAtivo=diarios[0][0],
-                        qntDiario=len(diarios)   
-                    )
-                else:
-                    define_userinfo(
-                        user=user,
-                        diarioAtivo=None,
-                        qntDiario=0   
-                    )
-                    
+                diarioAtivo = diarios[0][0] if diarios else None
+                qntDiario = len(diarios) if diarios else 0
+                define_userinfo(
+                    user=user,
+                    diarioAtivo=diarioAtivo,
+                    qntDiario=qntDiario
+                )
             # Abre página principal
         
         page.update()

@@ -1,1 +1,1 @@
-{"user": "(6, 'Dominguinhos', datetime.date(2025, 4, 17), '123321', 'domingo@gmail.com')", "qntDiario": 0, "diarioAtivo": null}
+{"user": "(1, 'teste', datetime.date(2025, 4, 2), 'teste123', 'email@gmail.com')", "qntDiario": 4, "diarioAtivo": "teste2"}
