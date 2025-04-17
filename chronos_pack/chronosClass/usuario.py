@@ -61,7 +61,7 @@ class Usuario:
             )
             return "Usuário criado", status
         else:
-            return "Usuário já existe!", ''
+            return "Usuário já existe!", None
     
     
     def deletar(
