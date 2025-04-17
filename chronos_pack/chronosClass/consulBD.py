@@ -106,19 +106,9 @@ def retorna_diarioinfo_userEmail(user_email:str):
         """
         
         cursor.execute(query, (user_email,))
-        diarios_nome = cursor.fetchall()
+        diarios = cursor.fetchall()
         
-        query = """
-        SELECT COUNT(nome) FROM diario
-        WHERE id_usuario = 
-        (SELECT id_usuario FROM usuario
-        WHERE email = %s);
-        """
-        
-        cursor.execute(query, (user_email,))
-        qnt_diarios = cursor.fetchall()
-        
-        return diarios_nome, qnt_diarios
+        return diarios
     except Exception as e:
         return e, None
     finally:
