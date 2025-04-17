@@ -1,15 +1,11 @@
 import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from chronos_pack.chronosClass.verifBD import verify_usuario
+from .assets.tools.defUserinfo import define_userinfo
 from chronos_pack.chronosClass.usuario import Usuario
-
-from flet import(Row, Page, MainAxisAlignment,
-    Text, Column, ScrollMode, TextField, app)
-
-from .assets.tools.conv import (cria_container_elementos,
-    cria_container_entrada, cria_botao, open_snack_bar)
-
+from chronos_pack.chronosClass.consulBD import retorna_usuario
+from flet import Row, Page, MainAxisAlignment, Text, Column, ScrollMode, TextField, app
+from .assets.tools.conv import cria_container_elementos, cria_container_entrada, cria_botao, open_snack_bar
 from .fluxo import voltar_pagina_inicial 
 
 """
@@ -57,6 +53,12 @@ def pagina_cadastrar(page:Page):
                     page=page,
                     texto=status,
                     cor="#006913"
+                )
+                _, user = retorna_usuario(email, senha)
+                define_userinfo(
+                    user=user,
+                    diarioAtivo=None,
+                    qntDiario=None 
                 )
             else:
                 open_snack_bar(
