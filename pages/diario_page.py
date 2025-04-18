@@ -60,7 +60,9 @@ def pagina_diario(page: Page):
         for i in range(len(diarios_user)):
             nome = diarios_user[i][1]
             atividade = "ativo" if nome == diarioAtivo else "inativo"
-            tempo_total = int(diarios_user[i][6])/60
+            tempo_dec = int(diarios_user[i][6])/60
+            tempo_int = int(tempo_dec)
+            minutos = (tempo_dec - tempo_int) * 60
             diario = cria_atividade(
                 Row(
                     [
@@ -68,7 +70,8 @@ def pagina_diario(page: Page):
                         Text(f"{nome}", font_family="Jersey15", size=50),
                         ativar_btn,
                         Text(atividade, font_family="Jersey15", size=50),
-                        Text(f"Tempo total: {tempo_total}h", font_family="Jersey15", size=50)
+                        Text(f"Tempo total: {tempo_int}h{minutos:.0f}min", 
+                            font_family="Jersey15", size=50)
                     ],
                     alignment=MainAxisAlignment.CENTER,
                     spacing=100
