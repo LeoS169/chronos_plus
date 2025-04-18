@@ -3,9 +3,18 @@ from json import load
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from assets.tools.conv import cria_container_elementos, cria_botao
+from chronos_pack.chronosClass.consulBD import retorna_usuario
 from flet import app, Page, MainAxisAlignment, CrossAxisAlignment, Row, Column, Text
 
-
+# Dados do user:
+with open("pages/userinfo.json", "r") as f_user:
+    arq = load(f_user)
+    user = arq['user']
+    _, nome = retorna_usuario(user)[1]
+    qnt_diario = arq['qntDiario']
+    diarioAtivo = arq['diarioAtivo']
+    
+    
 def pagina_principal(page:Page):
     page.title = "Chronos+"
     page.horizontal_alignment = MainAxisAlignment.CENTER
@@ -19,13 +28,13 @@ def pagina_principal(page:Page):
     
     # Textos da coluna superior
     texto_ola = Text(
-        "Olá, NOME!",
+        f"Olá, {nome}",
         font_family="Jersey15",
         size=100
     )
     
     diario_ativo_txt = Text(
-        "Diário ativo: nenhum",
+        f"Diário ativo: {diarioAtivo}",
         font_family="Jersey15",
         size=50
     )
