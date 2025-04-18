@@ -19,3 +19,9 @@ def go_cadastro(page: Page):
     from .cadastro_page import pagina_cadastrar
     page.clean()
     pagina_cadastrar(page=page)
+
+
+def go_principal_page(page: Page):
+    from .principal_page import pagina_principal
+    page.clean()
+    pagina_principal(page=page)
