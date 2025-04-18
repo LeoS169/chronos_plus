@@ -1,8 +1,15 @@
+import sys, os
+from json import load
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+from chronos_pack.chronosClass.consulBD import retorna_diario_byEmail
 from flet import Page, MainAxisAlignment, Row, Column, Text, ScrollMode, Container, app
 from assets.tools.conv import cria_container_elementos, cria_botao, cria_atividade
 
 # Dados user
-
+with open("pages/userinfo.json", "r") as f_user:
+    arq = load(f_user)
+    email = arq['user'] 
 lista_diarios = []
 
 def pagina_diario(page: Page):
