@@ -2,10 +2,10 @@ import sys, os
 from json import load
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from assets.tools.conv import cria_container_elementos, cria_botao, cria_atividade
+from .assets.tools.conv import cria_container_elementos, cria_botao, cria_atividade
 from chronos_pack.chronosClass.consulBD import retorna_chrono_diario
 from flet import Page, MainAxisAlignment, Row, Column, Text, ScrollMode, Container, app
-from fluxo import go_pagina_principal
+from .fluxo import go_pagina_principal
 
 # Dados user
 with open("pages/userinfo.json", "r") as f_user:
@@ -17,7 +17,12 @@ with open("pages/userinfo.json", "r") as f_user:
 chronos = retorna_chrono_diario(diarioAtivo)    
 lista_chronos = []
 
-def pagina_diario(page: Page):
+def voltar(page: Page):
+    global lista_chronos
+    lista_chronos = []
+    go_pagina_principal(page=page)
+
+def pagina_chronos(page: Page):
     page.title = "Chronos+"
     page.horizontal_alignment = MainAxisAlignment.CENTER
     page.bgcolor = "#222333"
@@ -80,7 +85,7 @@ def pagina_diario(page: Page):
     
     voltar_botao = cria_botao(
         "Voltar", 
-        lambda e: go_pagina_principal(page=page)
+        lambda e: voltar(page=page)
     )
     voltar_botao.width = 200
     voltar_botao.height = 60
@@ -132,6 +137,4 @@ def pagina_diario(page: Page):
             alignment=MainAxisAlignment.CENTER
         )
     )
-
-
-app(pagina_diario)
+    
