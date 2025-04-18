@@ -56,7 +56,7 @@ def pagina_cadastrar(page:Page):
                 )
                 define_userinfo(
                     user=email,
-                    diarioAtivo=None,
+                    diarioAtivo='nenhum!',
                     qntDiario=0 
                 )
             else:
