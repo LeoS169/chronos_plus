@@ -25,3 +25,9 @@ def go_principal_page(page: Page):
     from .principal_page import pagina_principal
     page.clean()
     pagina_principal(page=page)
+
+    
+def go_diario_page(page: Page):
+    from .diario_page import pagina_diario
+    page.clean()
+    pagina_diario(page=page)
