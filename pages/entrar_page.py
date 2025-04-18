@@ -5,7 +5,7 @@ from .assets.tools.conv import cria_container_elementos, cria_container_entrada,
 from .assets.tools.defUserinfo import define_userinfo
 from chronos_pack.chronosClass.consulBD import retorna_usuario, retorna_diarioinfo_userEmail
 from flet import Row, Page, MainAxisAlignment, Text, Column, ScrollMode, TextField, app
-from .fluxo import voltar_pagina_inicial 
+from .fluxo import voltar_pagina_inicial, go_principal_page 
 
 """
 Script com pagina de login.
@@ -52,9 +52,11 @@ def pagina_entrar(page:Page):
                 qntDiario = len(diarios) if diarios else 0
                 define_userinfo(
                     user=email,
+                    senha=senha,
                     diarioAtivo=diarioAtivo,
                     qntDiario=qntDiario
                 )
+                go_principal_page(page=page)
             # Abre página principal
         
         page.update()
