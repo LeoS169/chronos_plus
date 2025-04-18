@@ -6,7 +6,7 @@ from chronos_pack.chronosClass.usuario import Usuario
 from chronos_pack.chronosClass.consulBD import retorna_usuario
 from flet import Row, Page, MainAxisAlignment, Text, Column, ScrollMode, TextField, app
 from .assets.tools.conv import cria_container_elementos, cria_container_entrada, cria_botao, open_snack_bar
-from .fluxo import voltar_pagina_inicial, go_principal_page 
+from .fluxo import go_pagina_inicial, go_principal_page 
 
 """
 Script com pagina de cadastro.
@@ -110,7 +110,7 @@ def pagina_cadastrar(page:Page):
 
     
     voltar_botao = cria_botao(
-        "Voltar", lambda e: voltar_pagina_inicial(page)
+        "Voltar", lambda e: go_pagina_inicial(page)
     )
     voltar_botao.width = 200
     voltar_botao.height = 60

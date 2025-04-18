@@ -3,10 +3,14 @@ from flet import Page
 Esse arquivo controla o fluxo entre as páginas
 """
 
-def voltar_pagina_inicial(page: Page):
+def go_pagina_inicial(page: Page):
     from .inicial_page import pagina_inicial
     page.clean()
     pagina_inicial(page=page)
+    
+
+def voltar_pagina_principal(page: Page):
+    from .principal_page import voltar_pagina_inicial
     
 
 def go_entrar(page: Page):
