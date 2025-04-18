@@ -5,6 +5,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from .assets.tools.conv import cria_container_elementos, cria_botao
 from chronos_pack.chronosClass.consulBD import retorna_usuario
 from flet import app, Page, MainAxisAlignment, CrossAxisAlignment, Row, Column, Text
+from .fluxo import voltar_pagina_inicial
 
 # Dados do user:
 with open("pages/userinfo.json", "r") as f_user:
@@ -71,6 +72,10 @@ def pagina_principal(page:Page):
     chronos_btn = cria_botao("_Chronos", None)
     estati_btn = cria_botao("_Estatísticas", None)
     _ = cria_botao("_NãoSei", None)
+    _.width = 200
+    voltar_btn = cria_botao("_Voltar",
+        lambda e: voltar_pagina_inicial(page=page))
+    voltar_btn.width = 200
     
     coluna_inferior_esq = Column(
         [diario_btn, chronos_btn],
@@ -79,7 +84,8 @@ def pagina_principal(page:Page):
     )
     
     coluna_inferior_dir = Column(
-        [estati_btn, _],
+        [estati_btn, Row([_, voltar_btn],
+            alignment=MainAxisAlignment.CENTER)],
         alignment=MainAxisAlignment.CENTER,
         spacing=75
     )
