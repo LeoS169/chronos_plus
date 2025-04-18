@@ -5,6 +5,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from .assets.tools.conv import cria_container_elementos, cria_botao, cria_atividade
 from chronos_pack.chronosClass.consulBD import retorna_diario_byEmail
 from flet import Page, MainAxisAlignment, Row, Column, Text, ScrollMode, Container, app
+from .fluxo import go_pagina_principal
 
 # Dados user
 with open("pages/userinfo.json", "r") as f_user:
@@ -79,7 +80,8 @@ def pagina_diario(page: Page):
     
     
     voltar_botao = cria_botao(
-        "Voltar", None
+        "Voltar", 
+        lambda e: go_pagina_principal(page=page)
     )
     voltar_botao.width = 200
     voltar_botao.height = 60
