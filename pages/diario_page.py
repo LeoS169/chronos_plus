@@ -83,8 +83,6 @@ def pagina_diario(page: Page):
                 )
             )    
             lista_diarios.append(diario)
-    else:
-        pass
     
     
     voltar_botao = cria_botao(
