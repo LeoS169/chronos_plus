@@ -17,6 +17,11 @@ with open("pages/userinfo.json", "r") as f_user:
 diarios_user = retorna_diario_byEmail(email)
 lista_diarios = []
 
+def voltar(page: Page):
+    global lista_diarios
+    lista_diarios = []
+    go_pagina_principal(page=page)
+
 def pagina_diario(page: Page):
     page.title = "Chronos+"
     page.horizontal_alignment = MainAxisAlignment.CENTER
@@ -84,7 +89,7 @@ def pagina_diario(page: Page):
     
     voltar_botao = cria_botao(
         "Voltar", 
-        lambda e: go_pagina_principal(page=page)
+        lambda e: voltar(page=page)
     )
     voltar_botao.width = 200
     voltar_botao.height = 60
