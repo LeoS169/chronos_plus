@@ -9,8 +9,10 @@ def go_pagina_inicial(page: Page):
     pagina_inicial(page=page)
     
 
-def voltar_pagina_principal(page: Page):
-    from .principal_page import voltar_pagina_inicial
+def go_pagina_principal(page: Page):
+    from .principal_page import pagina_principal
+    page.clean()
+    pagina_principal(page=page)
     
 
 def go_entrar(page: Page):
