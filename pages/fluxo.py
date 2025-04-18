@@ -37,3 +37,9 @@ def go_diario_page(page: Page):
     from .diario_page import pagina_diario
     page.clean()
     pagina_diario(page=page)
+    
+
+def go_chronos_page(page: Page):
+    from .chronos_page import pagina_chronos
+    page.clean()
+    pagina_chronos(page=page)
