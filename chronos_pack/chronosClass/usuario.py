@@ -43,7 +43,9 @@ class Usuario:
             senha (str): senha do user
         
         Retorno:
-            str: status de inserção
+            tuple:
+                (str, str): Usuário registrado com sucesso
+                (str, None): Usuário já existe
         
         Excessões:
             user_existe = True.

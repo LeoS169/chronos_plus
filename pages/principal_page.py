@@ -2,15 +2,17 @@ import sys, os
 from json import load
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from assets.tools.conv import cria_container_elementos, cria_botao
+from .assets.tools.conv import cria_container_elementos, cria_botao
 from chronos_pack.chronosClass.consulBD import retorna_usuario
 from flet import app, Page, MainAxisAlignment, CrossAxisAlignment, Row, Column, Text
 
 # Dados do user:
 with open("pages/userinfo.json", "r") as f_user:
     arq = load(f_user)
-    user = arq['user']
-    _, nome = retorna_usuario(user)[1]
+    email = arq['user']
+    senha = arq['senha']
+    _, user = retorna_usuario(email, senha)
+    nome = user[1]
     qnt_diario = arq['qntDiario']
     diarioAtivo = arq['diarioAtivo']
     
@@ -113,5 +115,3 @@ def pagina_principal(page:Page):
         )
     )
     
-    
-app(pagina_principal)
