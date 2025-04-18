@@ -70,10 +70,14 @@ def pagina_principal(page:Page):
     
     diario_btn = cria_botao("_Diário",
         lambda e: go_diario_page(page=page))
+    
     chronos_btn = cria_botao("_Chronos", None)
+    
     estati_btn = cria_botao("_Estatísticas", None)
+    
     _ = cria_botao("_NãoSei", None)
     _.width = 200
+    
     voltar_btn = cria_botao("_Voltar",
         lambda e: go_pagina_inicial(page=page))
     voltar_btn.width = 200
