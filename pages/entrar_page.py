@@ -51,7 +51,7 @@ def pagina_entrar(page:Page):
                 diarioAtivo = diarios[0][0] if diarios else None
                 qntDiario = len(diarios) if diarios else 0
                 define_userinfo(
-                    user=user,
+                    user=email,
                     diarioAtivo=diarioAtivo,
                     qntDiario=qntDiario
                 )

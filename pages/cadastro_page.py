@@ -54,9 +54,8 @@ def pagina_cadastrar(page:Page):
                     texto=status,
                     cor="#006913"
                 )
-                _, user = retorna_usuario(email, senha)
                 define_userinfo(
-                    user=user,
+                    user=email,
                     diarioAtivo=None,
                     qntDiario=0 
                 )
