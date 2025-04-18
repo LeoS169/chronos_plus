@@ -123,3 +123,14 @@ def open_snack_bar(page:Page, texto:str, cor:str):
                     ),
                 bgcolor=cor
             ))
+    
+
+def cria_atividade(content):
+    return Container(
+        content=content,
+        padding=10,
+        height=75,
+        width=1500,
+        border_radius=50,
+        bgcolor="#171A4A"
+    )

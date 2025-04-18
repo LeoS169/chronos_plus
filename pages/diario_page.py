@@ -1,6 +1,9 @@
-from flet import Page, MainAxisAlignment, Row, Column, Text, ScrollMode, app
-from assets.tools.conv import cria_container_elementos, cria_botao
+from flet import Page, MainAxisAlignment, Row, Column, Text, ScrollMode, Container, app
+from assets.tools.conv import cria_container_elementos, cria_botao, cria_atividade
 
+# Dados user
+
+lista_diarios = []
 
 def pagina_diario(page: Page):
     page.title = "Chronos+"
@@ -34,7 +37,21 @@ def pagina_diario(page: Page):
     novo_diario_btn.width = 120
     novo_diario_btn.height = 45
     
-    # Container sobreposto ao principal
+    # Elementos do ontainer sobreposto ao principal
+    diario = cria_atividade(
+        Row(
+            [
+                Text("1", font_family="Jersey15", size=50),
+                Text("ativo", font_family="Jersey15", size=50),
+                Text("Tempo total: 20h", font_family="Jersey15", size=50)
+            ],
+            alignment=MainAxisAlignment.CENTER,
+            spacing=50
+        )
+    )
+    
+    lista_diarios.append(diario)
+    
     voltar_botao = cria_botao(
         "Voltar", None
     )
@@ -43,13 +60,16 @@ def pagina_diario(page: Page):
     voltar_botao.content.size = 50
     voltar_botao.style.overlay_color = "#971717"
     
+    
+    # Container sobreposto ao principal
     container_sobr = cria_container_elementos(
         Column(
             [
                 Column(
-                    controls=None, # Lista de diarios
-                    height=375,
-                    scroll=ScrollMode.HIDDEN
+                    controls=lista_diarios, # Lista de diarios
+                    height=440,
+                    scroll=ScrollMode.HIDDEN,
+                    spacing=30
                 ),
                 Row(
                     [voltar_botao],
@@ -61,6 +81,7 @@ def pagina_diario(page: Page):
     container_sobr.bgcolor = "#222333"
     container_sobr.height = 550
     container_sobr.width = 1150
+    container_sobr.padding = 20
     
     
     # Container principal
