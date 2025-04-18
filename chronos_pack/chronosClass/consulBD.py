@@ -75,6 +75,27 @@ def retorna_diario(nome:str):
         conex.close()
         
 
+def retorna_diario_byEmail(email_user:str):
+    try:
+        conex = pg2.connect(**db_conex)
+        cursor = conex.cursor()
+        query = """
+        SELECT * FROM diario
+        WHERE id_usuario =
+        (SELECT id_usuario FROM usuario
+        WHERE email = %s);
+        """
+        
+        cursor.execute(query, (email_user,))
+        diarios = cursor.fetchall()
+        return diarios
+    except Exception as e:
+        return e
+    finally:
+        cursor.close()
+        conex.close()
+    
+
 def retorna_materias_crono(id_cronograma:str):
     try:
         conex = pg2.connect(**db_conex)

@@ -37,16 +37,23 @@ def pagina_diario(page: Page):
     novo_diario_btn.width = 120
     novo_diario_btn.height = 45
     
-    # Elementos do ontainer sobreposto ao principal
+    # Elementos do Container sobreposto ao principal
+    ativar_btn = cria_botao("_Ativar", None)
+    ativar_btn.width = 130
+    ativar_btn.height = 50
+    ativar_btn.content.size = 40
+    ativar_btn.style.bgcolor = "#006913" 
     diario = cria_atividade(
         Row(
             [
                 Text("1", font_family="Jersey15", size=50),
+                Text("_Nome", font_family="Jersey15", size=50),
+                ativar_btn,
                 Text("ativo", font_family="Jersey15", size=50),
                 Text("Tempo total: 20h", font_family="Jersey15", size=50)
             ],
             alignment=MainAxisAlignment.CENTER,
-            spacing=50
+            spacing=100
         )
     )
     
@@ -59,7 +66,6 @@ def pagina_diario(page: Page):
     voltar_botao.height = 60
     voltar_botao.content.size = 50
     voltar_botao.style.overlay_color = "#971717"
-    
     
     # Container sobreposto ao principal
     container_sobr = cria_container_elementos(
@@ -82,7 +88,6 @@ def pagina_diario(page: Page):
     container_sobr.height = 550
     container_sobr.width = 1150
     container_sobr.padding = 20
-    
     
     # Container principal
     main_container = cria_container_elementos(
