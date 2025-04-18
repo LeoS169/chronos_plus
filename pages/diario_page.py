@@ -1,5 +1,5 @@
-from flet import Page, MainAxisAlignment, Row, app
-from assets.tools.conv import cria_container_elementos
+from flet import Page, MainAxisAlignment, Row, Column, Text, ScrollMode, app
+from assets.tools.conv import cria_container_elementos, cria_botao
 
 
 def pagina_diario(page: Page):
@@ -13,11 +13,70 @@ def pagina_diario(page: Page):
         "Jersey25": "pages/assets/fonts/Jersey25-Regular.ttf"
     }
     
+    # Elementos da Row superior
+    diario_name = Text(
+        "_Diários",
+        font_family="Jersey15",
+        size=75
+    )
+    
+    qnt_diarios = Text(
+        f"Quantidade de diários: n°",
+        font_family="Jersey15",
+        size=60
+    )
+    
+    novo_diario_btn = cria_botao(
+        "_Novo", None
+    )
+    novo_diario_btn.style.bgcolor = "#006913"
+    novo_diario_btn.content.size = 40
+    novo_diario_btn.width = 120
+    novo_diario_btn.height = 45
+    
+    # Container sobreposto ao principal
+    voltar_botao = cria_botao(
+        "Voltar", None
+    )
+    voltar_botao.width = 200
+    voltar_botao.height = 60
+    voltar_botao.content.size = 50
+    voltar_botao.style.overlay_color = "#971717"
+    
+    container_sobr = cria_container_elementos(
+        Column(
+            [
+                Column(
+                    controls=None, # Lista de diarios
+                    height=375,
+                    scroll=ScrollMode.HIDDEN
+                ),
+                Row(
+                    [voltar_botao],
+                    alignment=MainAxisAlignment.END
+                )
+            ]
+        )
+    )
+    container_sobr.bgcolor = "#222333"
+    container_sobr.height = 550
+    container_sobr.width = 1150
+    
+    
     # Container principal
     main_container = cria_container_elementos(
-        None
+        Column([
+            Row([diario_name, qnt_diarios, novo_diario_btn],
+                alignment=MainAxisAlignment.CENTER,
+                spacing=180),
+            Row(
+                [container_sobr],
+                MainAxisAlignment.CENTER
+            )
+        ])
     )
     main_container.margin = 20
+    main_container.padding = 5
     main_container.width = 1200
     main_container.height = 680
     
