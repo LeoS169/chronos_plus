@@ -136,3 +136,23 @@ def retorna_diarioinfo_userEmail(user_email:str):
         cursor.close()
         conex.close()
     
+    
+def retorna_chrono_diario(nome_diario:str):
+    try:
+        conex = pg2.connect(**db_conex)
+        cursor = conex.cursor()
+        query = """
+        SELECT * FROM cronograma
+        WHERE id_diario =
+        (SELECT id_diario FROM diario
+        WHERE nome = %s);
+        """
+        
+        cursor.execute(query, (nome_diario,))
+        chronos = cursor.fetchall()
+        return chronos
+    except Exception as e:
+        return e
+    finally:
+        cursor.close()
+        conex.close()
