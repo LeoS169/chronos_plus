@@ -9,7 +9,11 @@ from assets.tools.conv import cria_container_elementos, cria_botao, cria_ativida
 # Dados user
 with open("pages/userinfo.json", "r") as f_user:
     arq = load(f_user)
-    email = arq['user'] 
+    email = arq['user']
+    qntDiario = arq['qntDiario']
+    diarioAtivo = arq['diarioAtivo']
+    
+diarios_user = retorna_diario_byEmail(email)
 lista_diarios = []
 
 def pagina_diario(page: Page):
@@ -31,7 +35,7 @@ def pagina_diario(page: Page):
     )
     
     qnt_diarios = Text(
-        f"Quantidade de diários: n°",
+        f"Quantidade de diários: {qntDiario}",
         font_family="Jersey15",
         size=60
     )
@@ -50,21 +54,29 @@ def pagina_diario(page: Page):
     ativar_btn.height = 50
     ativar_btn.content.size = 40
     ativar_btn.style.bgcolor = "#006913" 
-    diario = cria_atividade(
-        Row(
-            [
-                Text("1", font_family="Jersey15", size=50),
-                Text("_Nome", font_family="Jersey15", size=50),
-                ativar_btn,
-                Text("ativo", font_family="Jersey15", size=50),
-                Text("Tempo total: 20h", font_family="Jersey15", size=50)
-            ],
-            alignment=MainAxisAlignment.CENTER,
-            spacing=100
-        )
-    )
     
-    lista_diarios.append(diario)
+    if diarios_user:
+        for i in range(len(diarios_user)):
+            nome = diarios_user[i][1]
+            atividade = "ativo" if nome == diarioAtivo else "inativo"
+            tempo_total = int(diarios_user[i][6])/60
+            diario = cria_atividade(
+                Row(
+                    [
+                        Text(f"{i}", font_family="Jersey15", size=50),
+                        Text(f"{nome}", font_family="Jersey15", size=50),
+                        ativar_btn,
+                        Text(atividade, font_family="Jersey15", size=50),
+                        Text(f"Tempo total: {tempo_total}h", font_family="Jersey15", size=50)
+                    ],
+                    alignment=MainAxisAlignment.CENTER,
+                    spacing=100
+                )
+            )    
+            lista_diarios.append(diario)
+    else:
+        pass
+    
     
     voltar_botao = cria_botao(
         "Voltar", None
