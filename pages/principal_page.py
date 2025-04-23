@@ -8,14 +8,20 @@ from flet import app, Page, MainAxisAlignment, CrossAxisAlignment, Row, Column, 
 from .fluxo import go_pagina_inicial, go_diario_page, go_chronos_page
 
 # Dados do user:
-with open("pages/userinfo.json", "r") as f_user:
-    arq = load(f_user)
-    email = arq['user']
-    senha = arq['senha']
-    _, user = retorna_usuario(email, senha)
-    nome = user[1]
-    qnt_diario = arq['qntDiario']
-    diarioAtivo = arq['diarioAtivo']
+nome = str()
+qnt_diario = str()
+diarioAtivo = str()
+
+def atualiza_userinfo():
+    global nome, qnt_diario, diarioAtivo
+    with open("pages/userinfo.json", "r") as f_user:
+        arq = load(f_user)
+        email = arq['user']
+        senha = arq['senha']
+        _, user = retorna_usuario(email, senha)
+        nome = user[1]
+        qnt_diario = arq['qntDiario']
+        diarioAtivo = arq['diarioAtivo']
     
     
 def pagina_principal(page:Page):
@@ -28,6 +34,8 @@ def pagina_principal(page:Page):
         "Jersey15": "pages/assets/fonts/Jersey15-Regular.ttf",
         "Jersey25": "pages/assets/fonts/Jersey25-Regular.ttf"
     }
+    global nome, qnt_diario, diarioAtivo
+    atualiza_userinfo()
     
     # Textos da coluna superior
     texto_ola = Text(
