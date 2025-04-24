@@ -7,12 +7,24 @@ from chronos_pack.chronosClass.consulBD import retorna_usuario
 from flet import app, Page, MainAxisAlignment, CrossAxisAlignment, Row, Column, Text
 from .fluxo import go_pagina_inicial, go_diario_page, go_chronos_page
 
+"""
+Esse arquivo possui toda a configuração
+e estrutura da página principal do
+programa
+"""
+
 # Dados do user:
 nome = str()
 qnt_diario = str()
 diarioAtivo = str()
 
-def atualiza_userinfo():
+def consul_userinfo():
+    """
+    Consulta userinfo.json
+    
+    Pega informaçãoes do userinfo.json para 
+    serem utilizados na página principal
+    """
     global nome, qnt_diario, diarioAtivo
     with open("pages/userinfo.json", "r") as f_user:
         arq = load(f_user)
@@ -35,7 +47,7 @@ def pagina_principal(page:Page):
         "Jersey25": "pages/assets/fonts/Jersey25-Regular.ttf"
     }
     global nome, qnt_diario, diarioAtivo
-    atualiza_userinfo()
+    consul_userinfo() # Atualiza valores do user
     
     # Textos da coluna superior
     texto_ola = Text(
