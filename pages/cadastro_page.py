@@ -89,6 +89,9 @@ def pagina_cadastrar(page:Page):
     entrada_senha_container = cria_container_entrada(
         "_Password", "Jersey10"
     )
+    entrada_senha_container.content.controls[1].password = True
+    entrada_senha_container.content.controls[1].can_reveal_password = True
+
     
     # TextFields das entradas
     nome_txtField = entrada_nome_container.content.controls[1]
