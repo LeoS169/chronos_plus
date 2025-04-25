@@ -18,6 +18,13 @@ diarios_user = retorna_diario_byEmail(email)
 lista_diarios = []
 
 def voltar(page: Page):
+    """
+    Função do botão de voltar
+    
+    Ao chamar a função, a lista de 
+    diarios é resetada e vai para
+    a página principal
+    """
     global lista_diarios
     lista_diarios = []
     go_pagina_principal(page=page)

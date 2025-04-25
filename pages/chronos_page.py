@@ -18,6 +18,13 @@ chronos = retorna_chrono_diario(diarioAtivo)
 lista_chronos = []
 
 def voltar(page: Page):
+    """
+    Função do botão de voltar
+    
+    Ao chamar a função, ele reseta
+    a lista de chronos e vai para a
+    página principal
+    """
     global lista_chronos
     lista_chronos = []
     go_pagina_principal(page=page)
