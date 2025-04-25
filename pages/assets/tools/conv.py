@@ -126,6 +126,15 @@ def open_snack_bar(page:Page, texto:str, cor:str):
     
 
 def cria_atividade(content):
+    """
+    Cria atividade
+    
+    Parâmetros:
+        content (controls): elemento flet de controle
+    
+    Retorno
+        container: flet.Container
+    """
     return Container(
         content=content,
         padding=10,
